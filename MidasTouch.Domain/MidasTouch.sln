@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MidasTouch.Domain", "MidasTouch.Domain\MidasTouch.Domain.csproj", "{F4AB7016-AC19-4D38-BAF2-50269F719DA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidasTouch.Data", "MidasTouch.Data\MidasTouch.Data.csproj", "{B5ECEE7F-EF20-400F-A513-DB7C1E5848CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MidasTouch.Data", "MidasTouch.Data\MidasTouch.Data.csproj", "{B5ECEE7F-EF20-400F-A513-DB7C1E5848CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidasTouch.Migrations", "MidasTouch.Migrations\MidasTouch.Migrations.csproj", "{75EE3D18-7FEC-42A5-9CFB-91B605EDF762}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MidasTouch.Migrations", "MidasTouch.Migrations\MidasTouch.Migrations.csproj", "{75EE3D18-7FEC-42A5-9CFB-91B605EDF762}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidasTouch.Tests", "MidasTouch.Tests\MidasTouch.Tests.csproj", "{E1C4DD34-6E67-41D9-AB24-8CB155C673F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{75EE3D18-7FEC-42A5-9CFB-91B605EDF762}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75EE3D18-7FEC-42A5-9CFB-91B605EDF762}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75EE3D18-7FEC-42A5-9CFB-91B605EDF762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1C4DD34-6E67-41D9-AB24-8CB155C673F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C4DD34-6E67-41D9-AB24-8CB155C673F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C4DD34-6E67-41D9-AB24-8CB155C673F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C4DD34-6E67-41D9-AB24-8CB155C673F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
