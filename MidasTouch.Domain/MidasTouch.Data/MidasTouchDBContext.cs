@@ -24,6 +24,8 @@ namespace MidasTouch.Data
             builder.Entity<History>().HasKey(e => e.Id);
             builder.Entity<Portfolio>().HasKey(e => e.Id);
             builder.Entity<User>().HasKey(e => e.Id);
+
+            builder.Entity<History>().Ignore(e=>e.PriceHistory);
         }
     }
 }
