@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MidasTouch.Data
 {
-    class MidasTouchDBContext: DbContext
+    class MidasTouchDBContext : DbContext
     {
         public DbSet<FinProduct> FinProducts { get; set; }
         public DbSet<History> Histories { get; set; }
@@ -25,4 +25,5 @@ namespace MidasTouch.Data
             builder.Entity<Portfolio>().HasKey(e => e.Id);
             builder.Entity<User>().HasKey(e => e.Id);
         }
+    }
 }
