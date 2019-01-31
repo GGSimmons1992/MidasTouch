@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MidasTouch.Domain.Abstracts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MidasTouch.Domain.Models
 {
-    public partial class User
+    public partial class User: AThing
     {
         public Portfolio Portfolio { get; set; }
         public string Name { get; set; }

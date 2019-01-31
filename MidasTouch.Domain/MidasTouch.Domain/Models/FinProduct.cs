@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MidasTouch.Domain.Abstracts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MidasTouch.Domain.Models
 {
-    public class FinProduct
+    public class FinProduct: AThing
     {
         public string CompanyName { get; set; }
         public string Ticker { get; set; }
