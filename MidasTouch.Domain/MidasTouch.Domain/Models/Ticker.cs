@@ -1,6 +1,8 @@
-﻿namespace MidasTouch.Domain.Models
+﻿using MidasTouch.Domain.Abstracts;
+
+namespace MidasTouch.Domain.Models
 {
-  public class Ticker
+  public class Ticker : AThing
   {
     public string Symbol { get; set; }
     public double Beta { get; set; }
