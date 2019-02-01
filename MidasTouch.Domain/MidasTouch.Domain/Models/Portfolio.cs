@@ -7,12 +7,12 @@ namespace MidasTouch.Domain.Models
 {
     public class Portfolio: AThing
     {
-        public Dictionary<string, int> Stocks { get; set; }
+        public List<Share> Shares { get; set; }
         public double Value { get; set; }
 
         public Portfolio()
         {
-            Stocks = new Dictionary<string, int>();
+            Shares = new List<Share>();
         }
     }
 }

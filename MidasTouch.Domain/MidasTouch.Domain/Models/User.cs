@@ -5,11 +5,11 @@ using System.Text;
 
 namespace MidasTouch.Domain.Models
 {
-    public partial class User: AThing
+    public class User: AThing
     {
         public Portfolio Portfolio { get; set; }
-        public string Name { get; set; }
-        public double Account { get; set; }
+        public Identity Identity { get; set; }
+        public double AccountBalance { get; set; }
 
         public User()
         {

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace MidasTouch.Domain.Models
 {
-    public class History: AThing
-    {
-        public Dictionary<DateTime, double> PriceHistory { get; set; }
-    }
+  public class History: AThing
+  {
+    public List<Share> HistoricalData { get; set; }
+  }
 }
