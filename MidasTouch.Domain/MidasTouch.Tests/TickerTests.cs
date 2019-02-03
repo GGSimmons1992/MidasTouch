@@ -5,7 +5,10 @@ using Xunit;
 
 namespace MidasTouch.Tests
 {
-    public class FinProductTests
+   public class TickerTests
     {
+        [Fact]
+        public void Test_Flux()
+        { }
     }
 }

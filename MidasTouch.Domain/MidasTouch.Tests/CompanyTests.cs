@@ -5,7 +5,10 @@ using Xunit;
 
 namespace MidasTouch.Tests
 {
-    public class PortfolioTests
+    public class CompanyTests
     {
+        [Fact]
+        public void Test_GetCap()
+        { }
     }
 }
