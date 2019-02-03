@@ -15,6 +15,7 @@ namespace MidasTouch.Domain.Models
       var Random = new Random();
 
       var Delta = Random.NextDouble();
-      Stocks.Price += Stocks.Price * (2 * Change * Delta - Change);    }
+      Stocks.Price += Stocks.Price * (2 * Change * Delta - Change);
+    }
   }
 }
