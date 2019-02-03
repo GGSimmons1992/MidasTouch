@@ -4,8 +4,13 @@ using System.Text;
 
 namespace MidasTouch.Domain.Abstracts
 {
-    public class AThing
+  public class AThing
+  {
+    public int Id { get; set; }
+
+    public virtual bool IsValid()
     {
-        public int Id { get; set; }
+      return this.Id > 0;
     }
+  }
 }

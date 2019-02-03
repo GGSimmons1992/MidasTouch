@@ -1,11 +1,12 @@
 ﻿using MidasTouch.Domain.Abstracts;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace MidasTouch.Domain.Models
 {
-  public class History: AThing
+  public static class Market
   {
-    public List<Share> HistoricalData { get; set; }
+    public static List<Company> Companies { get; set; }
   }
 }
