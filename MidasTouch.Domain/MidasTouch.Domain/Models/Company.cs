@@ -27,5 +27,12 @@ namespace MidasTouch.Domain.Models
       Tickers = new List<Ticker>();
     }
 
+    public override bool IsValid()
+    {
+      return
+        Validator.ValidateString(this) &&
+        Validator.ValidateMoney(this) &&
+        (Tickers != null);
+    }
   }
 }

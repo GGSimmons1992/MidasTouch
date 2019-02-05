@@ -96,5 +96,12 @@ namespace MidasTouch.Domain.Models
       return true;
     }
 
+    public override bool IsValid()
+    {
+      return
+        Portfolio.IsValid() &&
+        Identity.IsValid() &&
+        Validator.ValidateMoney(this);
+    }
   }
 }

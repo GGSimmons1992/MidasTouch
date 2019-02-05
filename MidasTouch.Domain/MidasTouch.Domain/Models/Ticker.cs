@@ -17,5 +17,13 @@ namespace MidasTouch.Domain.Models
       var Delta = Random.NextDouble();
       Stocks.Price += Stocks.Price * (2 * Change * Delta - Change);
     }
+
+    public override bool IsValid()
+    {
+      return
+        Validator.ValidateString(this) &&
+        Validator.ValidateMoney(this) &&
+        Stocks.IsValid();
+    }
   }
 }

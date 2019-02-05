@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MidasTouch.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MidasTouch.Domain.Abstracts
 {
-  public class AThing
+  public class AThing : IThing
   {
     public int Id { get; set; }
 
