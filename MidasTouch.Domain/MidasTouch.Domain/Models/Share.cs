@@ -11,5 +11,13 @@ namespace MidasTouch.Domain.Models
     public int NumberOfShares { get; set; }
     public string Symbol { get; set; }
     public double Price { get; set; }
+
+    public override bool IsValid()
+    {
+      return
+        Validator.ValidateString(this) &&
+        Validator.ValidateNumber(this) &&
+        Validator.ValidateMoney(this);
+    }
   }
 }

@@ -6,5 +6,11 @@ namespace MidasTouch.Domain.Models
   {
     public string First { get; set; }
     public string Last { get; set; }
+
+    public override bool IsValid()
+    {
+      return
+        Validator.ValidateString(this);
+    }
   }
 }
