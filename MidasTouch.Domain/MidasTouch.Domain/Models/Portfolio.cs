@@ -8,7 +8,17 @@ namespace MidasTouch.Domain.Models
   public class Portfolio: AThing
   {
     public List<Share> Shares { get; set; }
-    public double Value { get; set; }
+    public double Value
+        { get
+            {
+                double c = 0;
+                foreach (var item in Shares)
+                {
+                    c += (item.NumberOfShares * item.Price);
+                }
+                return c;
+            }
+        }
 
     public Portfolio()
     {

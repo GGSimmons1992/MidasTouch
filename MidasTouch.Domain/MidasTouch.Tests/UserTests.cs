@@ -29,18 +29,27 @@ namespace MidasTouch.Tests
                     NumberOfStocks =100,
                     Price=(double) 7.5
                 },
-                Symbol="GOOG"
+                Symbol="GOOG",
+                Beta=2.0
             };
 
             Sut = new User()
             {
-                AccountBalance =(double) 5000m,
-                Portfolio=new Portfolio()
+                AccountBalance = (double)5000m,
+                Portfolio = new Portfolio()
                 {
-                    Shares=new List<Share>() {Share}
+                    Shares = new List<Share>() { Share }
+                },
+                Identity = new Identity()
+                {
+                    Name= new Name()
+                    {
+                        First="John",
+                        Last="Schmidt"
+                    }
                 }
-                
             };
+            
 
             Company = new Company()
             {
@@ -49,6 +58,14 @@ namespace MidasTouch.Tests
             };
 
             Market.Companies = new List<Company>() { Company };
+
+        }
+
+        [Fact]
+        public void Test_IsValid()
+        {
+            Assert.True(Sut.IsValid());
+            Assert.True(Company.IsValid());
 
         }
 

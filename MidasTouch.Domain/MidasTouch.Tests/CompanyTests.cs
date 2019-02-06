@@ -17,8 +17,10 @@ namespace MidasTouch.Tests
                 Stocks=new Stock()
                 {
                     NumberOfStocks=100,
-                    Price=(double)50m
-                }
+                    Price=50,
+                },
+                Beta=1.2,
+                Symbol="GOOG"
             };
 
             var ticker2=new Ticker()
@@ -27,13 +29,22 @@ namespace MidasTouch.Tests
                 {
                     NumberOfStocks=300,
                     Price=(double)10m
-                }
+                },
+                Beta = 1.2,
+                Symbol = "GOOG"
             };
 
             Sut= new Company()
             {
-                Tickers=new List<Ticker>(){ticker1,ticker2}
+                Tickers=new List<Ticker>(){ticker1,ticker2},
+                Name="Alphabet"
             };
+        }
+
+        [Fact]
+        public void Test_IsValid()
+        {
+            Assert.True(Sut.IsValid());
         }
 
         [Fact]

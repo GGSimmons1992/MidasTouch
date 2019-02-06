@@ -17,9 +17,17 @@ namespace MidasTouch.Tests
                 Beta = 1.2,
                 Stocks = new Stock()
                 {
-                    Price = 50.0
-                }
+                    Price = 50.0,
+                    NumberOfStocks=50
+                },
+                Symbol="MSFT"
             };
+        }
+
+        [Fact]
+        public void Test_IsValid()
+        {
+            Assert.True(Sut.IsValid());
         }
 
         [Fact]
