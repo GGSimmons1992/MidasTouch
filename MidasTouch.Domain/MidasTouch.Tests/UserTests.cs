@@ -35,7 +35,7 @@ namespace MidasTouch.Tests
                 Stocks = new Stock()
                 {
                     NumberOfStocks =100,
-                    Price=(double) 7.5
+                    Price= 7.5
                 },
                 Symbol="GOOG",
                 Beta=2.0
@@ -152,7 +152,9 @@ namespace MidasTouch.Tests
                 originalShareNumber += item.NumberOfShares;
             }
             Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < 175);
-            Assert.True(Sut.Sell("Google", "GOOG", 175));
+            var sellvalidation = Sut.Sell("Google", "GOOG", 175);
+            Assert.True(sellvalidation);
+            Assert.True(originalShareTypes > Sut.Portfolio.Shares.Count);
 
             var newShareNumber = 0;
             foreach (var item in Sut.Portfolio.Shares)
