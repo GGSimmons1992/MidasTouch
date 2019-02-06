@@ -10,16 +10,24 @@ namespace MidasTouch.Tests
     {
         public User Sut {get;set;}
         public Company Company { get; set; }
-        public Share Share { get; set; }
+        public Share Share1 { get; set; }
+        public Share Share2 { get; set; }
         public Ticker Ticker { get; set; }
 
         public UserTests()
         {
-            Share = new Share()
+            Share1 = new Share()
             {
                 NumberOfShares = 100,
-                Price = (double)50m,
+                Price = 50,
                 Symbol="GOOG"
+            };
+
+            Share2 = new Share()
+            {
+                NumberOfShares = 100,
+                Price = 100,
+                Symbol = "GOOG"
             };
 
             Ticker = new Ticker()
@@ -38,7 +46,7 @@ namespace MidasTouch.Tests
                 AccountBalance = (double)5000m,
                 Portfolio = new Portfolio()
                 {
-                    Shares = new List<Share>() { Share }
+                    Shares = new List<Share>() { Share1,Share2 }
                 },
                 Identity = new Identity()
                 {
@@ -97,19 +105,39 @@ namespace MidasTouch.Tests
         [Fact]
         public void Test_AccountOverDrawn()
         {
-            Sut.AccountBalance = (double)10m;
+            Sut.AccountBalance = 10;
             Assert.False(Sut.Buy("Google", "GOOG", 90));
         }
 
         [Fact]
-        public void Test_Sell()
+        public void Test_SellFromAether()
+        {
+            Assert.False(Sut.Sell("Google", "GOOG", 500));
+        }
+
+        [Fact]
+        public void Test_SellFromOne()
         {
             var originalShareNumber = Sut.Portfolio.Shares[0].NumberOfShares;
-            var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;
+            var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;//In this test, we have enough just to stick with share type 1
 
-            Assert.False(Sut.Sell("Google", "GOOG", 150));
             Assert.True(Sut.Sell("Google", "GOOG", 25));
             Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < originalShareNumber);
+            Assert.True(Company.Tickers[0].Stocks.NumberOfStocks > originalStockNumber);
+
+        }
+
+        [Fact]
+        public void Test_SellFromMany()
+        {
+            var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;
+            var originalShareNumber = 0;
+            foreach (var item in Sut.Portfolio.Shares)
+            {
+                originalShareNumber += item.NumberOfShares;
+            }
+            Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < 150);
+            Assert.True(Sut.Sell("Google", "GOOG", 150));
             Assert.True(Company.Tickers[0].Stocks.NumberOfStocks > originalStockNumber);
 
         }
