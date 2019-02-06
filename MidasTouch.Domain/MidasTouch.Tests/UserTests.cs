@@ -110,16 +110,31 @@ namespace MidasTouch.Tests
         }
 
         [Fact]
+        public void Test_PostBuyValues()
+        {
+            double oldPortfolioValue = Sut.Portfolio.Value;
+            double oldBalance = Sut.AccountBalance;
+
+            Sut.Buy("Google", "GOOG", 25);
+
+            Assert.True(oldPortfolioValue < Sut.Portfolio.Value);
+            Assert.True(oldBalance > Sut.AccountBalance);
+        }
+
+        [Fact]
         public void Test_SellFromAether()
         {
+            Assert.False(Sut.Sell("Amazon", "GOOG", 25));
+            Assert.False(Sut.Sell("Google", "AMZN", 25));
             Assert.False(Sut.Sell("Google", "GOOG", 500));
         }
 
         [Fact]
         public void Test_SellFromOne()
         {
+            //In this test, we have enough just to stick with share type 1
             var originalShareNumber = Sut.Portfolio.Shares[0].NumberOfShares;
-            var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;//In this test, we have enough just to stick with share type 1
+            var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;
 
             Assert.True(Sut.Sell("Google", "GOOG", 25));
             Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < originalShareNumber);
@@ -131,6 +146,7 @@ namespace MidasTouch.Tests
         public void Test_SellFromMany()
         {
             var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;
+            var originalShareTypes = Sut.Portfolio.Shares.Count;
             var originalShareNumber = 0;
             foreach (var item in Sut.Portfolio.Shares)
             {
@@ -138,8 +154,20 @@ namespace MidasTouch.Tests
             }
             Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < 150);
             Assert.True(Sut.Sell("Google", "GOOG", 150));
-            Assert.True(Company.Tickers[0].Stocks.NumberOfStocks > originalStockNumber);
+            Assert.True(Sut.Portfolio.Shares.Count==originalShareTypes - 1);
 
+        }
+
+        [Fact]
+        public void Test_PostSellValues()
+        {
+            double oldPortfolioValue = Sut.Portfolio.Value;
+            double oldBalance = Sut.AccountBalance;
+
+            Sut.Sell("Google", "GOOG", 150);
+
+            Assert.True(oldPortfolioValue > Sut.Portfolio.Value);
+            Assert.True(oldBalance < Sut.AccountBalance);
         }
     }
 }
