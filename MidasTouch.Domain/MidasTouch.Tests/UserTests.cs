@@ -145,16 +145,22 @@ namespace MidasTouch.Tests
         [Fact]
         public void Test_SellFromMany()
         {
-            var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;
-            var originalShareTypes = Sut.Portfolio.Shares.Count;
+            int originalShareTypes = Sut.Portfolio.Shares.Count;
             var originalShareNumber = 0;
             foreach (var item in Sut.Portfolio.Shares)
             {
                 originalShareNumber += item.NumberOfShares;
             }
-            Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < 150);
-            Assert.True(Sut.Sell("Google", "GOOG", 150));
-            Assert.True(Sut.Portfolio.Shares.Count==originalShareTypes - 1);
+            Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < 175);
+            Assert.True(Sut.Sell("Google", "GOOG", 175));
+
+            var newShareNumber = 0;
+            foreach (var item in Sut.Portfolio.Shares)
+            {
+               newShareNumber += item.NumberOfShares;
+            }
+
+            Assert.True(newShareNumber<originalShareNumber);
 
         }
 
