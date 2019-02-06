@@ -66,6 +66,10 @@ namespace MidasTouch.Tests
         {
             Assert.True(Sut.IsValid());
             Assert.True(Company.IsValid());
+            foreach (var item in Sut.Portfolio.Shares)
+            {
+                Assert.True(item.IsValid());
+            }
 
         }
 
