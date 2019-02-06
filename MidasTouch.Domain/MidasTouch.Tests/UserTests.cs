@@ -78,17 +78,27 @@ namespace MidasTouch.Tests
         {
             var numberOfShareTypes = Sut.Portfolio.Shares.Count;
             var originalStockNumber = Company.Tickers[0].Stocks.NumberOfStocks;
-            Assert.False(Sut.Buy("Amazon", "GOOG", 25));
-            Assert.False(Sut.Buy("Google", "AMZN", 25));
-            Assert.False(Sut.Buy("Google", "GOOG", 150));
-
+            
             Assert.True(Sut.Buy("Google","GOOG",25));
             Assert.True(Sut.Portfolio.Shares.Count == (numberOfShareTypes+1));
             Assert.True(Company.Tickers[0].Stocks.NumberOfStocks < originalStockNumber);
 
-            Sut.AccountBalance = (double) 10m;
-            Assert.False(Sut.Buy("Google", "GOOG", 90));
 
+        }
+
+        [Fact]
+        public void Test_FailedBuys()
+        {
+            Assert.False(Sut.Buy("Amazon", "GOOG", 25));
+            Assert.False(Sut.Buy("Google", "AMZN", 25));
+            Assert.False(Sut.Buy("Google", "GOOG", 150));
+        }
+
+        [Fact]
+        public void Test_AccountOverDrawn()
+        {
+            Sut.AccountBalance = (double)10m;
+            Assert.False(Sut.Buy("Google", "GOOG", 90));
         }
 
         [Fact]
