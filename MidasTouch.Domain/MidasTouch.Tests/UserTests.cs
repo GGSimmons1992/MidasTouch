@@ -154,7 +154,7 @@ namespace MidasTouch.Tests
             Assert.True(Sut.Portfolio.Shares[0].NumberOfShares < 175);
             var sellvalidation = Sut.Sell("Google", "GOOG", 175);
             Assert.True(sellvalidation);
-            Assert.True(originalShareTypes > Sut.Portfolio.Shares.Count);
+            Assert.True(originalShareTypes > Sut.Portfolio.Shares.Count);//This Assert is failing
 
             var newShareNumber = 0;
             foreach (var item in Sut.Portfolio.Shares)
