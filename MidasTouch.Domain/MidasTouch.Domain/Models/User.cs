@@ -89,6 +89,7 @@ namespace MidasTouch.Domain.Models
           shares -= sh[0].NumberOfShares;
           t.Stocks.NumberOfStocks += sh[0].NumberOfShares;
           AccountBalance += (sh[0].NumberOfShares * sh[0].Price);
+          Portfolio.Shares.Remove(sh[0]);
           sh.RemoveAt(0);
         }
       }
