@@ -12,6 +12,15 @@ namespace MidasTouch.Data
     {
         public IConfiguration Configuration { get; }
 
+        public MidasTouchDBContext()
+        {
+        }
+
+        public MidasTouchDBContext(IConfiguration config)
+        {
+            Configuration = config;
+        }
+
         public DbSet<Company> Companies { get; set; }
         public DbSet<Identity> Identities { get; set; }
         public DbSet<Name> Names { get; set; }

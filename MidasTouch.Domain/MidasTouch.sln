@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MidasTouch.Mvc", "MidasTouc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidasTouch.Data", "MidasTouch.Data\MidasTouch.Data.csproj", "{37E4C36D-6D2D-4701-B74A-F376371C8068}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidasTouch.Migration", "MidasTouch.Migration\MidasTouch.Migration.csproj", "{C621DA83-067A-47F0-8DA4-C747B0BA6740}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{37E4C36D-6D2D-4701-B74A-F376371C8068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37E4C36D-6D2D-4701-B74A-F376371C8068}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37E4C36D-6D2D-4701-B74A-F376371C8068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C621DA83-067A-47F0-8DA4-C747B0BA6740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C621DA83-067A-47F0-8DA4-C747B0BA6740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C621DA83-067A-47F0-8DA4-C747B0BA6740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C621DA83-067A-47F0-8DA4-C747B0BA6740}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

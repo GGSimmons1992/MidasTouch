@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MidasTouch.Migrations
+namespace MidasTouch.Migration
 {
     class Program
     {

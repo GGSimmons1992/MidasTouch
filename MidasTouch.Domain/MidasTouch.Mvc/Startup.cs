@@ -35,7 +35,7 @@ namespace MidasTouch.Mvc
             });
 
             services.AddDbContext<MidasTouchDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase")));
+                    options.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase")));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
