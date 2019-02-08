@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewData["Title"] = "Stock Chart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Stock Chart</h1>
+
+<div id="div" class="row" style="padding:20px;">
+    <div class="col-md-3">
+        <div class="row form-group form-inline" style="margin-top:5px">
+            <label class="col-sm-5 control-label" for="ticker">Ticker:</label>
+            <div class="col-sm-7">
+                <input id="ticker" type="text" class="form-control input-sm"
+                       style="height:25px;width:100%" value="SPY" placeholder="SPY" />
+            </div>
+        </div>
+        <div class="row form-group form-inline" style="margin-top:-5px">
+            <label class="col-sm-5 control-label" for="startDate">Start Date:</label>
+            <div class="col-sm-7">
+                <input id="startDate" type="text" class="form-control input-sm"
+                       style="height:25px;width:100%" value="2019-01-01" placeholder="YYYY-MM-DD" />
+            </div>
+        </div>
+        <div class="row form-group form-inline" style="margin-top:-5px">
+            <label class="col-sm-5 control-label" for="endDate">End Date:</label>
+            <div class="col-sm-7">
+                <input id="endDate" type="text" class="form-control input-sm"
+                       style="height:25px;width:100%" value="2019-02-06" placeholder="YYYY-MM-DD" />
+            </div>
+        </div>
+        <div class="row form-group form-inline" style="margin-top:20px">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-7">
+                <button id="btnCreateChart" class="btn btn-success">Create Chart</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div id="chart" style="width:100%;height:700px;overflow:hidden;padding:10px">
+            <div id="candlestick" style="height:55%"></div>
+            <div id="volume" style="height:30%;margin-top:-1%"></div>
+            <div id="filter" style="height:15%;margin-top:1%"></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        createStockChart();
+
+        $('#btnCreateChart').click(function () {
+            createStockChart();
+        });
+
+        function createStockChart() {
+            google.charts.load('current', { 'packages': ['corechart', 'controls'] });
+            google.charts.setOnLoadCallback(drawChart);
+            var chart_div = document.getElementById('chart');
+            var ticker = document.getElementById('ticker').value;
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
+
+            var viewStartDate = (new Date(endDate));
+            viewStartDate.setMonth(viewStartDate.getMonth() - 3);
+            var viewEndDate = new Date(endDate);
+
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('datetime', 'Date');
+                data.addColumn('number', 'Open');
+                data.addColumn('number', 'High');
+                data.addColumn('number', 'Low');
+                data.addColumn('number', 'Close');
+                data.addColumn('number', 'Volume');
+
+                $.ajax({
+                    url: '/api/apiStockData/' + ticker + '/' + startDate + '/' + endDate + '/daily',
+                    method: 'GET',
+                    dataType: 'json'
+                }).done(function (d) {
+                    d.forEach(function (di) {
+                        data.addRow([{ v: new Date(di.date), f: di.date }, di.open,
+                        di.high, di.low, di.close, di.volume]);
+                    });
+
+                    var dashboard = new google.visualization.Dashboard(chart_div);
+                    var control = new google.visualization.ControlWrapper({
+                        controlType: 'ChartRangeFilter',
+                        containerId: 'filter',
+                        options: {
+                            filterColumnIndex: 0,
+                            ui: {
+                                chartType: 'LineChart',
+                                chartOptions: {
+                                    chartArea: {
+                                        height: '80%', width: '85%', left: 100,
+                                        backgroundColor: { stroke: "gray", strokeWidth: 1 }
+                                    },
+                                    hAxis: { baselineColor: 'none' }
+                                },
+                                chartView: { columns: [0, 4] },
+                            }
+                        },
+                        state: {
+                            range: {
+                                start: viewStartDate,
+                                end: viewEndDate
+                            }
+                        }
+                    });
+
+                    var chart = new google.visualization.ChartWrapper({
+                        chartType: 'CandlestickChart',
+                        containerId: 'candlestick',
+                        options: {
+                            chartArea: {
+                                height: '80%', width: '85%', left: 100,
+                                backgroundColor: { stroke: "gray", strokeWidth: 1 }
+                            },
+                            hAxis: {
+                                type: 'category', slantedText: false, maxTextLines: 1,
+                                maxAlternation: 1
+                            },
+                            legend: { position: 'none' },
+                            candlestick: {
+                                fallingColor: { strokeWidth: 0, fill: '#a52714' },
+                                risingColor: { strokeWidth: 0, fill: '#0f9d58' }
+                            },
+                            title: 'Stock Price: ' + ticker,
+                        },
+                        view: { columns: [0, 3, 1, 4, 2] }
+                    });
+
+                    var volume = new google.visualization.ChartWrapper({
+                        chartType: 'ColumnChart',
+                        containerId: 'volume',
+                        options: {
+                            chartArea: {
+                                height: '80%', width: '85%', left: 100, top: 40, bottom: 30,
+                                backgroundColor: { stroke: "gray", strokeWidth: 1 }
+                            },
+                            hAxis: {
+                                type: 'category', slantedText: false, maxTextLines: 1,
+                                maxAlternation: 1
+                            },
+                            legend: { position: 'none' },
+                            title: "Volume: " + ticker
+                        },
+                        view: { columns: [0, 5] }
+                    });
+
+                    dashboard.bind(control, [chart, volume]);
+                    dashboard.draw(data);
+
+                }).fail(function () {
+                    alert('Failed to create the chart. Please try it again.');
+                });
+            }
+        }
+
+    </script>
+}
