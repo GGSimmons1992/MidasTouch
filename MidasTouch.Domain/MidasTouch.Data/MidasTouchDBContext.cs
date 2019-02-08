@@ -3,11 +3,15 @@ using MidasTouch.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions;
+using Microsoft.Extensions.Configuration;
 
 namespace MidasTouch.Data
 {
-    class MidasTouchDBContext : DbContext
+    public class MidasTouchDBContext : DbContext
     {
+        public IConfiguration Configuration { get; }
+
         public DbSet<Company> Companies { get; set; }
         public DbSet<Identity> Identities { get; set; }
         public DbSet<Name> Names { get; set; }
@@ -19,7 +23,7 @@ namespace MidasTouch.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer();
+            builder.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase"));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

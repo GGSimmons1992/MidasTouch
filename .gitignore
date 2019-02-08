@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/MidasTouch.Domain/MidasTouch.Data/appsettings.Development.json
+/MidasTouch.Domain/MidasTouch.Data/appsettings.json
