@@ -37,11 +37,35 @@ namespace MidasTouch.Data.Helpers
             return userlist;
         }
 
+        public User GetUserDependancies(User user)
+        {
+            user.Portfolio = ph.GetPortfolioByUser(user);
+            user.Identity = ih.GetIdentityByUser(user);
+
+            return user;
+        }
+
         public List<User> GetUsers()
         {
             var userlist = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity).ToList();
-
+            if (userlist == null)
+            {
+                return userlist;
+            }
             return GetUserDependancies(userlist);
+        }
+
+        public User GetUserByName(Name name)
+        {
+            var user = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity)
+                .Where(u=>u.Identity.Name.Id==name.Id).FirstOrDefault();
+
+            if (user == null)
+            {
+                return user;
+            }
+
+            return GetUserDependancies(user);
         }
 
     }
