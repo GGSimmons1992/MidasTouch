@@ -42,21 +42,23 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script>
-        createStockChart();
+        //createStockChart();
 
-        $('.sub').click(function () {
+        document.querySelector('#sub').addEventListener('click', (function () {
             createStockChart();
-        });
+        }));
 
         function createStockChart() {
             google.charts.load('current', { 'packages': ['corechart', 'controls'] });
             google.charts.setOnLoadCallback(drawChart);
             var chart_div = document.getElementById('chart');
-            var ticker = document.getElementById('symbol').value;
+            var ticker = document.getElementById('Symbol').value;
 
-            var viewEndDate = new Date(Date.getDate());
-            var viewStartDate = new Date(viewEndDate.getMonth - 3);
-            var startDate;
+            var viewStartDate = new Date('@DateTime.Now');
+            viewStartDate.setMonth(viewStartDate.getMonth() - 3);
+            var viewEndDate = new Date('@DateTime.Now');
+            var startDate = viewStartDate.getFullYear + '-' + viewStartDate.getMonth + '-' + viewStartDate.getDate;
+            var endDate = viewEndDate.getFullYear + '-' + viewEndDate.getMonth + '-' + viewEndDate.getDate;
 
             function drawChart() {
                 var data = new google.visualization.DataTable();
@@ -74,8 +76,7 @@
                 }).done(function (d) {
                     d.forEach(function (di) {
                         data.addRow([{ v: new Date(di.date), f: di.date }, di.open,
-                            di.high, di.low, di.close, di.volume]);
-                        //startDate = di.
+                        di.high, di.low, di.close, di.volume]);
                     });
 
                     var dashboard = new google.visualization.Dashboard(chart_div);
