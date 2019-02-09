@@ -62,8 +62,7 @@
             var startDate = document.getElementById('startDate').value;
             var endDate = document.getElementById('endDate').value;
 
-            var viewStartDate = (new Date(endDate));
-            viewStartDate.setMonth(viewStartDate.getMonth() - 3);
+            var viewStartDate = (new Date(startDate));
             var viewEndDate = new Date(endDate);
 
             function drawChart() {
