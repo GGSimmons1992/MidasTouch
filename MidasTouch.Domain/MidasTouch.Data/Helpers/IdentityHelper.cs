@@ -16,6 +16,12 @@ namespace MidasTouch.Data.Helpers
             _db = new MidasTouchDBContext();
         }
 
+        public long SetIdentity(Identity domidentity)
+        {
+            _db.Identities.Add(domidentity);
+            return _db.SaveChanges();
+        }
+
         public List<Identity> GetIdentities()
         {
             return _db.Identities.Include(x => x.Name).ToList();
