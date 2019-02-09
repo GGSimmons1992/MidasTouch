@@ -10,10 +10,12 @@ namespace MidasTouch.Data.Helpers
     public class ShareHelper
     {
         private MidasTouchDBContext _db { get; set; }
+        private PortfolioHelper ph { get; set; }
 
         public ShareHelper()
         {
             _db = new MidasTouchDBContext();
+            ph = new PortfolioHelper();
         }
 
         public long SetShare(Share share)
@@ -26,5 +28,12 @@ namespace MidasTouch.Data.Helpers
         {
             return _db.Shares.ToList();
         }
+
+        public List<Share> GetSharesByUser(User domuser)
+        {
+            var domportfolio = ph.GetPortfolioByUser(domuser);
+            return domportfolio.Shares;
+        }
+
     }
 }
