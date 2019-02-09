@@ -25,5 +25,10 @@ namespace MidasTouch.Data.Helpers
         {
             return _db.Identities.Include(x => x.Name).Where(i => i.Id == user.Identity.Id).FirstOrDefault();
         }
+
+        public Identity GetIdentityByName(Name name)
+        {
+            return  _db.Identities.Include(x => x.Name).Where(i => i.Name.Id == name.Id).FirstOrDefault();
+        }
     }
 }
