@@ -1,0 +1,28 @@
+﻿@model MidasTouch.Mvc.Models.StockInfoModel
+@{
+    ViewData["Title"] = "Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Market Summary</h1>
+
+<div class="d-flex bd-highlight mb-3">
+    <div class="d-flex bd-highlight mb-3">
+
+        <form asp-action="Create" class="">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Symbol" class="control-label font-weight-bold"></label>
+                <input asp-for="Symbol" class="form-control" name="symbol" />
+                <span asp-validation-for="Symbol" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+    <div class="p-2 bd-highlight"><partial name="_DisplayQuote" /> </div>
+</div>
