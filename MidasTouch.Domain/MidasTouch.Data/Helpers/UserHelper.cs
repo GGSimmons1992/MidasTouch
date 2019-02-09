@@ -24,7 +24,7 @@ namespace MidasTouch.Data.Helpers
 
         public List<User> GetUsers()
         {
-            var userlist = _db.Users.Include(x => x.Portfolio).Include(y => y.Portfolio).ToList();
+            var userlist = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity).ToList();
             return userlist;
         }
 

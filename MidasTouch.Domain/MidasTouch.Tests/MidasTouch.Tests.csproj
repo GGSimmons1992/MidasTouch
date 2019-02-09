@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MidasTouch.Data\MidasTouch.Data.csproj" />
     <ProjectReference Include="..\MidasTouch.Domain\MidasTouch.Domain.csproj" />
   </ItemGroup>
 
