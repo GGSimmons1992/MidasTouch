@@ -330,3 +330,4 @@ ASALocalRun/
 .mfractor/
 /MidasTouch.Domain/MidasTouch.Data/appsettings.Development.json
 /MidasTouch.Domain/MidasTouch.Data/appsettings.json
+/MidasTouch.Domain/MidasTouch.Tests/HelperTests/UserHelperTests.cs
