@@ -20,9 +20,14 @@
 
             <div class="form-group">
                 <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="button" value="Trade" class="btn btn-primary" data-toggle="modal" data-target="#trademodal" />
+
             </div>
         </form>
     </div>
+
+
+    <partial name="_TradeStock" />
 
     <div class="p-2 bd-highlight"><partial name="_DisplayQuote" /> </div>
 </div>
