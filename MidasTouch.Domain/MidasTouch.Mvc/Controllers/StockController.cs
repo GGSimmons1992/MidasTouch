@@ -46,5 +46,10 @@ namespace MidasTouch.Mvc.Controllers
 
             return View();
         }
+
     }
+
+
 }
+
+
