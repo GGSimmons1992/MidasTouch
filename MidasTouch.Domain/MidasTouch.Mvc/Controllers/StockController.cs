@@ -48,8 +48,4 @@ namespace MidasTouch.Mvc.Controllers
         }
 
     }
-
-
 }
-
-
