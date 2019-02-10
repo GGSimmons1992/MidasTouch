@@ -14,7 +14,7 @@
 
             <div class="form-group">
                 <label asp-for="Symbol" class="control-label font-weight-bold"></label>
-                <input asp-for="Symbol" class="form-control" name="symbol" />
+                <input asp-for="Symbol" class="form-control" placeholder="spy" name="symbol" />
                 <span asp-validation-for="Symbol" class="text-danger"></span>
             </div>
 
@@ -25,16 +25,6 @@
     </div>
 
     <div class="p-2 bd-highlight"><partial name="_DisplayQuote" /> </div>
-    <div>
-        <div id="div" class="row" style="padding:20px;">
-            <div class="col-md-9">
-                <div id="chart" style="width:1000px;height:700px;overflow:hidden;padding:10px">
-                    <div id="candlestick" style="height:55%"></div>
-                    <div id="filter" style="height:15%;margin-top:1%"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -42,7 +32,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script>
-        //createStockChart();
+        createStockChart();
 
         document.querySelector('#sub').addEventListener('click', (function () {
             createStockChart();
@@ -54,11 +44,11 @@
             var chart_div = document.getElementById('chart');
             var ticker = document.getElementById('Symbol').value;
 
-            var viewStartDate = new Date('@DateTime.Now');
-            viewStartDate.setMonth(viewStartDate.getMonth() - 3);
-            var viewEndDate = new Date('@DateTime.Now');
-            var startDate = viewStartDate.getFullYear + '-' + viewStartDate.getMonth + '-' + viewStartDate.getDate;
-            var endDate = viewEndDate.getFullYear + '-' + viewEndDate.getMonth + '-' + viewEndDate.getDate;
+            var viewStartDate = new Date('@DateTime.Today');
+            viewStartDate.setYear(viewStartDate.getFullYear() - 1);
+            var viewEndDate = new Date('@DateTime.Today');
+            var startDate = viewStartDate.getFullYear() + '-0' + viewStartDate.getMonth() + '-0' + viewStartDate.getDate();
+            var endDate = viewEndDate.getFullYear() + '-0' + viewEndDate.getMonth() + '-0' + viewEndDate.getDate();
 
             function drawChart() {
                 var data = new google.visualization.DataTable();
@@ -130,9 +120,7 @@
                     dashboard.bind(control, chart);
                     dashboard.draw(data);
 
-                }).fail(function () {
-                    alert('Failed to create the chart. Please try it again.');
-                });
+                    })
             }
         };
 
