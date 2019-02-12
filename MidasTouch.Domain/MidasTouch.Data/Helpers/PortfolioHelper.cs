@@ -9,7 +9,7 @@ namespace MidasTouch.Data.Helpers
 {
     public class PortfolioHelper
     {
-        private MidasTouchDBContext _db { get; set; }
+        public virtual MidasTouchDBContext _db { get; set; }
 
         public PortfolioHelper()
         {

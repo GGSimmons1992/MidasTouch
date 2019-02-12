@@ -30,21 +30,21 @@ namespace MidasTouch.Data
         public DbSet<Ticker> Tickers { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsbuilder)
         {
-            builder.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase"));
+            optionsbuilder.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase"));
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
-            builder.Entity<Company>().HasKey(e => e.Id);
-            builder.Entity<Identity>().HasKey(e => e.Id);
-            builder.Entity<Name>().HasKey(e => e.Id);
-            builder.Entity<Portfolio>().HasKey(e => e.Id);
-            builder.Entity<Share>().HasKey(e => e.Id);
-            builder.Entity<Stock>().HasKey(e => e.Id);
-            builder.Entity<Ticker>().HasKey(e => e.Id);
-            builder.Entity<User>().HasKey(e => e.Id);
+            modelbuilder.Entity<Company>().HasKey(e => e.Id);
+            modelbuilder.Entity<Identity>().HasKey(e => e.Id);
+            modelbuilder.Entity<Name>().HasKey(e => e.Id);
+            modelbuilder.Entity<Portfolio>().HasKey(e => e.Id);
+            modelbuilder.Entity<Share>().HasKey(e => e.Id);
+            modelbuilder.Entity<Stock>().HasKey(e => e.Id);
+            modelbuilder.Entity<Ticker>().HasKey(e => e.Id);
+            modelbuilder.Entity<User>().HasKey(e => e.Id);
 
         }
     }

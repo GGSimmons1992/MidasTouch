@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MidasTouch.Data\MidasTouch.Data.csproj" />
+    <ProjectReference Include="..\MidasTouch.Tests\MidasTouch.Tests.csproj" />
   </ItemGroup>
 
 </Project>

@@ -330,3 +330,15 @@ ASALocalRun/
 .mfractor/
 /MidasTouch.Domain/MidasTouch.Data/appsettings.Development.json
 /MidasTouch.Domain/MidasTouch.Data/appsettings.json
+/MidasTouch.Domain/MidasTouch.Tests/HelperTests/UserHelperTests.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperModels/IdentityHelperReplica.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperModels/PortfolioHelperReplica.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperModels/ShareHelperReplica.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperModels/TestDbContext.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperModels/UserHelperReplica.cs
+/MidasTouch.Domain/MidasTouch.Tests/Migrations/20190212021057_first_migration.cs
+/MidasTouch.Domain/MidasTouch.Tests/Migrations/20190212021057_first_migration.Designer.cs
+/MidasTouch.Domain/MidasTouch.Tests/Migrations/TestDbContextModelSnapshot.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperTests/ShareHelperTests.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperTests/PortfolioHelperTests.cs
+/MidasTouch.Domain/MidasTouch.Tests/HelperTests/IdentityHelperTests.cs
