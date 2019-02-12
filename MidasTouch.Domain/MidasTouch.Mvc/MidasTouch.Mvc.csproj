@@ -9,9 +9,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="newtonsoft.json" Version="12.0.1" />
     <PackageReference Include="YahooFinanceApi" Version="2.1.1" />
+    <ProjectReference Include="..\MidasTouch.Data\MidasTouch.Data.csproj" />
+    <ProjectReference Include="..\MidasTouch.Domain\MidasTouch.Domain.csproj" />
   </ItemGroup>
+
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1Development_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
