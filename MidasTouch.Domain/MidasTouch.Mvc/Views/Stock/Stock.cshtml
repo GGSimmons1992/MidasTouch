@@ -1,4 +1,4 @@
-﻿@model MidasTouch.Mvc.Models.StockInfoModel
+﻿@model MidasTouch.Mvc.Models.StockQuote
 @{
     ViewData["Title"] = "Stock";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,7 +25,8 @@
         </form>
     </div>
 
-    <div class="p-2 bd-highlight"><partial name="_DisplayQuote" /> </div>
+    <partial name="_TradeStock" />
+    <div class="p-2 bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
 </div>
 
 
@@ -50,7 +51,6 @@
             var viewEndDate = new Date('@DateTime.Today');
             var startDate = viewStartDate.toISOString().split('T')[0];
             var endDate = viewEndDate.toISOString().split('T')[0];
-            console.log(startDate);
 
             function drawChart() {
                 var data = new google.visualization.DataTable();
@@ -127,4 +127,4 @@
         };
 
     </script>
-    }
+}
