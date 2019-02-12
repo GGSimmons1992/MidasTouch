@@ -14,20 +14,117 @@
 
             <div class="form-group">
                 <label asp-for="Symbol" class="control-label font-weight-bold"></label>
-                <input asp-for="Symbol" class="form-control" name="symbol" />
+                <input asp-for="Symbol" class="form-control" placeholder="spy" name="symbol" />
                 <span asp-validation-for="Symbol" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="submit" value="Search" id="sub" class="btn btn-primary" />
                 <input type="button" value="Trade" class="btn btn-primary" data-toggle="modal" data-target="#trademodal" />
-
             </div>
         </form>
     </div>
 
-
-    <partial name="_TradeStock" />
-
     <div class="p-2 bd-highlight"><partial name="_DisplayQuote" /> </div>
 </div>
+
+
+@section scripts{
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        createStockChart();
+
+        document.querySelector('#sub').addEventListener('click', (function () {
+            createStockChart();
+        }));
+
+        function createStockChart() {
+            google.charts.load('current', { 'packages': ['corechart', 'controls'] });
+            google.charts.setOnLoadCallback(drawChart);
+            var chart_div = document.getElementById('chart');
+            var ticker = document.getElementById('Symbol').value;
+
+            var viewStartDate = new Date('@DateTime.Today');
+            viewStartDate.setYear(viewStartDate.getFullYear() - 1);
+            var viewEndDate = new Date('@DateTime.Today');
+            var startDate = viewStartDate.toISOString().split('T')[0];
+            var endDate = viewEndDate.toISOString().split('T')[0];
+            console.log(startDate);
+
+            function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('datetime', 'Date');
+                data.addColumn('number', 'Open');
+                data.addColumn('number', 'High');
+                data.addColumn('number', 'Low');
+                data.addColumn('number', 'Close');
+                data.addColumn('number', 'Volume');
+
+                $.ajax({
+                    url: '/api/apiStockData/' + ticker + '/' + startDate + '/' + endDate + '/daily',
+                    method: 'GET',
+                    dataType: 'json'
+                }).done(function (d) {
+                    d.forEach(function (di) {
+                        data.addRow([{ v: new Date(di.date), f: di.date }, di.open,
+                        di.high, di.low, di.close, di.volume]);
+                    });
+
+                    var dashboard = new google.visualization.Dashboard(chart_div);
+                    var control = new google.visualization.ControlWrapper({
+                        controlType: 'ChartRangeFilter',
+                        containerId: 'filter',
+                        options: {
+                            filterColumnIndex: 0,
+                            ui: {
+                                chartType: 'LineChart',
+                                chartOptions: {
+                                    chartArea: {
+                                        height: '80%', width: '85%', left: 100,
+                                        backgroundColor: { stroke: "gray", strokeWidth: 1 }
+                                    },
+                                    hAxis: { baselineColor: 'none' }
+                                },
+                                chartView: { columns: [0, 4] },
+                            }
+                        },
+                        state: {
+                            range: {
+                                start: viewStartDate,
+                                end: viewEndDate
+                            }
+                        }
+                    });
+
+                    var chart = new google.visualization.ChartWrapper({
+                        chartType: 'CandlestickChart',
+                        containerId: 'candlestick',
+                        options: {
+                            chartArea: {
+                                height: '80%', width: '85%', left: 100,
+                                backgroundColor: { stroke: "gray", strokeWidth: 1 }
+                            },
+                            hAxis: {
+                                type: 'category', slantedText: false, maxTextLines: 1,
+                                maxAlternation: 1
+                            },
+                            legend: { position: 'none' },
+                            candlestick: {
+                                fallingColor: { strokeWidth: 0, fill: '#a52714' },
+                                risingColor: { strokeWidth: 0, fill: '#0f9d58' }
+                            },
+                            title: 'Stock Price: ' + ticker,
+                        },
+                        view: { columns: [0, 3, 1, 4, 2] }
+                    });
+
+                    dashboard.bind(control, chart);
+                    dashboard.draw(data);
+
+                    })
+            }
+        };
+
+    </script>
+    }
