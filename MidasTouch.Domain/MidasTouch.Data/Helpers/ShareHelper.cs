@@ -32,7 +32,9 @@ namespace MidasTouch.Data.Helpers
         public List<Share> GetSharesByUser(User domuser)
         {
             var domportfolio = ph.GetPortfolioByUser(domuser);
-            return domportfolio.Shares;
+            var pshares = domportfolio.Shares;
+
+            return pshares;
         }
 
     }
