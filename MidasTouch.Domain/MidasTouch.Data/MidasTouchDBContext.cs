@@ -32,7 +32,7 @@ namespace MidasTouch.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsbuilder)
         {
-            optionsbuilder.UseSqlServer("server=garydotnet2019.database.windows.net;database=MidasTouchDB; Integrated Security=True;");
+            optionsbuilder.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)

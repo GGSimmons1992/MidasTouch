@@ -9,9 +9,9 @@ namespace MidasTouch.Data.Helpers
 {
     public class UserHelper
     {
-        private MidasTouchDBContext _db { get; set; }
-        private PortfolioHelper ph { get; set; }
-        private IdentityHelper ih { get; set; }
+        public virtual MidasTouchDBContext _db { get; set; }
+        public virtual PortfolioHelper ph { get; set; }
+        public virtual IdentityHelper ih { get; set; }
 
         public UserHelper()
         {

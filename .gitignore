@@ -336,3 +336,6 @@ ASALocalRun/
 /MidasTouch.Domain/MidasTouch.Tests/HelperModels/ShareHelperReplica.cs
 /MidasTouch.Domain/MidasTouch.Tests/HelperModels/TestDbContext.cs
 /MidasTouch.Domain/MidasTouch.Tests/HelperModels/UserHelperReplica.cs
+/MidasTouch.Domain/MidasTouch.Tests/Migrations/20190212021057_first_migration.cs
+/MidasTouch.Domain/MidasTouch.Tests/Migrations/20190212021057_first_migration.Designer.cs
+/MidasTouch.Domain/MidasTouch.Tests/Migrations/TestDbContextModelSnapshot.cs
