@@ -20,6 +20,7 @@
 
             <div class="form-group">
                 <input type="submit" value="Search" id="sub" class="btn btn-primary" />
+                <input type="button" value="Trade" class="btn btn-primary" data-toggle="modal" data-target="#trademodal" />
             </div>
         </form>
     </div>
@@ -47,8 +48,9 @@
             var viewStartDate = new Date('@DateTime.Today');
             viewStartDate.setYear(viewStartDate.getFullYear() - 1);
             var viewEndDate = new Date('@DateTime.Today');
-            var startDate = viewStartDate.getFullYear() + '-0' + viewStartDate.getMonth() + '-0' + viewStartDate.getDate();
-            var endDate = viewEndDate.getFullYear() + '-0' + viewEndDate.getMonth() + '-0' + viewEndDate.getDate();
+            var startDate = viewStartDate.toISOString().split('T')[0];
+            var endDate = viewEndDate.toISOString().split('T')[0];
+            console.log(startDate);
 
             function drawChart() {
                 var data = new google.visualization.DataTable();
