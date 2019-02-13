@@ -9,9 +9,10 @@ namespace MidasTouch.Data.Helpers
 {
     public class UserHelper
     {
-        public virtual MidasTouchDBContext _db { get; set; }
-        public virtual PortfolioHelper ph { get; set; }
-        public virtual IdentityHelper ih { get; set; }
+        public MidasTouchDBContext _db { get; set; }
+        public PortfolioHelper ph { get; set; }
+        public IdentityHelper ih { get; set; }
+        public InMemoryDbContext _idb { get; set; }
 
         public UserHelper()
         {
@@ -20,14 +21,24 @@ namespace MidasTouch.Data.Helpers
             ih = new IdentityHelper();
         }
 
+        public UserHelper(InMemoryDbContext idb)
+        {
+            _idb = idb;
+            ph = new PortfolioHelper(idb);
+            ih = new IdentityHelper(idb);
+        }
+
+
         public long SetUser(User domuser)
         {
+            if (_db == null) { var _db = _idb; }
             _db.Users.Add(domuser);
             return _db.SaveChanges();
         }
 
         public List<User> GetUserDependancies(List<User> userlist)
         {
+            if (_db == null) { var _db = _idb; }
             foreach (var user in userlist)
             {
                 user.Portfolio = ph.GetPortfolioByUser(user);
@@ -39,6 +50,7 @@ namespace MidasTouch.Data.Helpers
 
         public User GetUserDependancies(User user)
         {
+            if (_db == null) { var _db = _idb; }
             user.Portfolio = ph.GetPortfolioByUser(user);
             user.Identity = ih.GetIdentityByUser(user);
 
@@ -47,6 +59,7 @@ namespace MidasTouch.Data.Helpers
 
         public List<User> GetUsers()
         {
+            if (_db == null) { var _db = _idb; }
             var userlist = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity).ToList();
             if (userlist == null)
             {
@@ -57,6 +70,7 @@ namespace MidasTouch.Data.Helpers
 
         public User GetUserByName(Name name)
         {
+            if (_db == null) { var _db = _idb; }
             var user = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity)
                 .Where(u=>u.Identity.Name.Id==name.Id).FirstOrDefault();
 

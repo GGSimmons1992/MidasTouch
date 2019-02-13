@@ -9,8 +9,9 @@ namespace MidasTouch.Data.Helpers
 {
     public class ShareHelper
     {
-        public virtual MidasTouchDBContext _db { get; set; }
-        public virtual PortfolioHelper ph { get; set; }
+        public MidasTouchDBContext _db { get; set; }
+        public PortfolioHelper ph { get; set; }
+        public InMemoryDbContext _idb { get; set; }
 
         public ShareHelper()
         {
@@ -18,19 +19,28 @@ namespace MidasTouch.Data.Helpers
             ph = new PortfolioHelper();
         }
 
+        public ShareHelper(InMemoryDbContext idb)
+        {
+            _idb = idb;
+            ph = new PortfolioHelper(idb);
+        }
+
         public long SetShare(Share share)
         {
+            if (_db == null) { var _db = _idb; }
             _db.Shares.Add(share);
             return _db.SaveChanges();
         }
 
         public List<Share> GetShares()
         {
+            if (_db == null) { var _db = _idb; }
             return _db.Shares.ToList();
         }
 
         public List<Share> GetSharesByUser(User domuser)
         {
+            if (_db == null) { var _db = _idb; }
             var domportfolio = ph.GetPortfolioByUser(domuser);
             var pshares = domportfolio.Shares;
 
