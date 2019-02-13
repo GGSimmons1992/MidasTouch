@@ -3,6 +3,7 @@ using MidasTouch.Data.Helpers;
 using MidasTouch.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -63,6 +64,21 @@ namespace MidasTouch.Tests
             uh.SetUser(Sut);
             Assert.NotNull(uh.GetUsers());
             Assert.NotEmpty(uh.GetUsers());
+        }
+
+        [Fact]
+        public void Test_GetUserByName()
+        {
+            uh.SetUser(Sut);
+            var userlist=uh.GetUsers();
+            var name = (userlist.FirstOrDefault(u => u.Identity.Name.First == Sut.Identity.Name.First)).Identity.Name;
+            Assert.NotNull(name);
+            var datauser=uh.GetUserByName(name);
+
+            var datashare50 = (datauser.Portfolio.Shares).FirstOrDefault(s => s.Price == 50);
+            Assert.NotNull(datashare50);
+            Assert.True(datauser.Portfolio.Value == Sut.Portfolio.Value);
+
         }
 
     }
