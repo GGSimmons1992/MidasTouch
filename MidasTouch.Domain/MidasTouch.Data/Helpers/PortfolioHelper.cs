@@ -22,20 +22,6 @@ namespace MidasTouch.Data.Helpers
             _idb = idb;
         }
 
-        public long SetPortfolio(Portfolio domportfolio)
-        {
-            if (_db != null)
-            {
-                _db.Portfolios.Add(domportfolio);
-                return _db.SaveChanges();
-            }
-            else
-            {
-                _idb.Portfolios.Add(domportfolio);
-                return _idb.SaveChanges();
-            }
-        }
-
         public List<Portfolio> GetPortfolios()
         {
             if (_db != null)
