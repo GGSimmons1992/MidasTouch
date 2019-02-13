@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MidasTouch.Data;
 
 namespace MidasTouch.Mvc
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -30,6 +34,11 @@ namespace MidasTouch.Mvc
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddDbContext<MidasTouchDBContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase")));
+
+            MidasTouchDBContext.Configuration = Configuration;
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
