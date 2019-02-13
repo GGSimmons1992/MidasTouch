@@ -58,3 +58,11 @@ body {
 #midasnav{
     background-color: #800080;
 }
+
+html body *{
+    font-family: Garamond;
+}
+
+.form-control{
+    border-radius: 9px;
+}
