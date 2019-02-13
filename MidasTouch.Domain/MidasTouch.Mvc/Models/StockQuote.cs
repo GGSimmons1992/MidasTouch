@@ -16,7 +16,5 @@
         public double ChangePercent { get; set; }
         public double Week52High { get; set; }
         public double Week52Low { get; set; }
-        public int ShareCount { get; set; }
-
     }
 }
