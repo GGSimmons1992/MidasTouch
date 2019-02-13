@@ -75,9 +75,10 @@ namespace MidasTouch.Mvc.Controllers
 
                     string MarketCapFormatted = Stock.MarketCap.ToString("#,##0");
 
-                    BuyStock.Buy(symbol, buysharescount);
+                    
                     BuyStock.LatestPrice = Stock.LatestPrice;
                     BuyStock.CompanyName = Stock.CompanyName;
+                    BuyStock.Buy(symbol, buysharescount);
 
                     if (Stock.LatestVolume > buysharescount)
                     {
