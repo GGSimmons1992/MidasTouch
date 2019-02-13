@@ -10,7 +10,7 @@ namespace MidasTouch.Data
 {
     public class MidasTouchDBContext : DbContext
     {
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; set; }
 
         public MidasTouchDBContext()
         {
