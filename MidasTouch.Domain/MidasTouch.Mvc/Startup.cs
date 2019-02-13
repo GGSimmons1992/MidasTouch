@@ -20,6 +20,7 @@ namespace MidasTouch.Mvc
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -36,6 +37,8 @@ namespace MidasTouch.Mvc
 
             services.AddDbContext<MidasTouchDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase")));
+
+            MidasTouchDBContext.Configuration = Configuration;
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

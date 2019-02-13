@@ -9,9 +9,10 @@ namespace MidasTouch.Data.Helpers
 {
     public class UserHelper
     {
-        public virtual MidasTouchDBContext _db { get; set; }
-        public virtual PortfolioHelper ph { get; set; }
-        public virtual IdentityHelper ih { get; set; }
+        public MidasTouchDBContext _db { get; set; }
+        public PortfolioHelper ph { get; set; }
+        public IdentityHelper ih { get; set; }
+        public InMemoryDbContext _idb { get; set; }
 
         public UserHelper()
         {
@@ -20,10 +21,26 @@ namespace MidasTouch.Data.Helpers
             ih = new IdentityHelper();
         }
 
+        public UserHelper(InMemoryDbContext idb)
+        {
+            _idb = idb;
+            ph = new PortfolioHelper(idb);
+            ih = new IdentityHelper(idb);
+        }
+
+
         public long SetUser(User domuser)
         {
-            _db.Users.Add(domuser);
-            return _db.SaveChanges();
+            if (_db != null)
+            {
+                _db.Users.Add(domuser);
+                return _db.SaveChanges();
+            }
+            else
+            {
+                _idb.Users.Add(domuser);
+                return _idb.SaveChanges();
+            }
         }
 
         public List<User> GetUserDependancies(List<User> userlist)
@@ -39,6 +56,7 @@ namespace MidasTouch.Data.Helpers
 
         public User GetUserDependancies(User user)
         {
+           
             user.Portfolio = ph.GetPortfolioByUser(user);
             user.Identity = ih.GetIdentityByUser(user);
 
@@ -47,25 +65,54 @@ namespace MidasTouch.Data.Helpers
 
         public List<User> GetUsers()
         {
-            var userlist = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity).ToList();
-            if (userlist == null)
+            if (_db != null)
             {
-                return userlist;
+                var userlist = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity).ToList();
+                if (userlist == null)
+                {
+                    return userlist;
+                }
+                return GetUserDependancies(userlist);
             }
-            return GetUserDependancies(userlist);
+            else
+            {
+                var userlist = _idb.Users.Include(x => x.Portfolio).Include(y => y.Identity).ToList();
+                if (userlist == null)
+                {
+                    return userlist;
+                }
+                return GetUserDependancies(userlist);
+            }
+            
         }
 
         public User GetUserByName(Name name)
         {
-            var user = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity)
-                .Where(u=>u.Identity.Name.Id==name.Id).FirstOrDefault();
-
-            if (user == null)
+            if (_db != null)
             {
-                return user;
-            }
+                var user = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity)
+                .Where(u => u.Identity.Name.Id == name.Id).FirstOrDefault();
 
-            return GetUserDependancies(user);
+                if (user == null)
+                {
+                    return user;
+                }
+
+                return GetUserDependancies(user);
+            }
+            else
+            {
+                var user = _idb.Users.Include(x => x.Portfolio).Include(y => y.Identity)
+                .Where(u => u.Identity.Name.Id == name.Id).FirstOrDefault();
+
+                if (user == null)
+                {
+                    return user;
+                }
+
+                return GetUserDependancies(user);
+            }
+            
         }
 
     }

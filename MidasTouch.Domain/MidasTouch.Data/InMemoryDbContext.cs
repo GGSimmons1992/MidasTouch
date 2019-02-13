@@ -1,25 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MidasTouch.Domain.Models;
 using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.InMemory;
 using System.Text;
-using Microsoft.Extensions;
-using Microsoft.Extensions.Configuration;
+using MidasTouch.Domain.Models;
 
 namespace MidasTouch.Data
 {
-    public class MidasTouchDBContext : DbContext
+    public class InMemoryDbContext:DbContext
     {
-        public static IConfiguration Configuration { get; set; }
-
-        public MidasTouchDBContext()
-        {
-        }
-
-        public MidasTouchDBContext(IConfiguration config)
-        {
-            Configuration = config;
-        }
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Identity> Identities { get; set; }
@@ -32,7 +21,7 @@ namespace MidasTouch.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("MidasTouchDatabase"));
+            optionsBuilder.UseInMemoryDatabase(databaseName:"TestDB");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
