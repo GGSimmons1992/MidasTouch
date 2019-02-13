@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
+using MidasTouch.Domain.Models;
 using MidasTouch.Mvc.Models;
 
 namespace MidasTouch.Mvc.Controllers
@@ -29,7 +30,7 @@ namespace MidasTouch.Mvc.Controllers
                 HttpResponseMessage response = client.GetAsync(IEXTrading_API_PATH).GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
-                    var Stock = response.Content.ReadAsAsync<StockInfoModel>().GetAwaiter().GetResult();
+                    var Stock = response.Content.ReadAsAsync<StockQuote>().GetAwaiter().GetResult();
 
                     string MarketCapFormatted = Stock.MarketCap.ToString("#,##0");
 
@@ -46,6 +47,19 @@ namespace MidasTouch.Mvc.Controllers
 
             return View();
         }
+
+
+
+        public IActionResult Buy(string symbol, int shares)
+        {
+            var user = new User();
+            var company = new Company();
+            company.Name = ViewBag.CompanyName;
+            user.Buy(company.Name, symbol, shares);
+
+            return View();
+        }
+
 
     }
 }

@@ -1,4 +1,4 @@
-﻿@model MidasTouch.Mvc.Models.StockInfoModel
+﻿@model MidasTouch.Mvc.Models.StockQuote
 @{
     ViewData["Title"] = "Stock";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,11 +12,16 @@
         <form asp-action="Create" class="">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Symbol" class="control-label font-weight-bold"></label>
-                <input asp-for="Symbol" class="form-control" placeholder="spy" name="symbol" />
-                <span asp-validation-for="Symbol" class="text-danger"></span>
+
+
+            <div class="row form-group form-inline" style="margin-top:5px;font-size:25px;">
+                <label class="col-sm-5 control-label" for="ticker">Ticker:</label>
+                <div class="col-sm-7 pl-0">
+                    <input asp-for="Symbol" name="symbol" class="form-control input-sm"
+                           style="height:35px;width:100%" value="SPY" placeholder="SPY" />
+                </div>
             </div>
+
 
             <div class="form-group">
                 <input type="submit" value="Search" id="sub" class="btn btn-primary" />
@@ -25,7 +30,8 @@
         </form>
     </div>
 
-    <div class="p-2 bd-highlight"><partial name="_DisplayQuote" /> </div>
+    <partial name="_TradeStock" />
+    <div class="p-2 bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
 </div>
 
 
@@ -50,7 +56,6 @@
             var viewEndDate = new Date('@DateTime.Today');
             var startDate = viewStartDate.toISOString().split('T')[0];
             var endDate = viewEndDate.toISOString().split('T')[0];
-            console.log(startDate);
 
             function drawChart() {
                 var data = new google.visualization.DataTable();
@@ -127,4 +132,4 @@
         };
 
     </script>
-    }
+}

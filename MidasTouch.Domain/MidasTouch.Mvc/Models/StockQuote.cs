@@ -1,7 +1,8 @@
 ﻿namespace MidasTouch.Mvc.Models
 {
-    public class StockInfoModel
+    public class StockQuote
     {
+
         public string Symbol { get; set; }
         public string CompanyName { get; set; }
         public string Sector { get; set; }
