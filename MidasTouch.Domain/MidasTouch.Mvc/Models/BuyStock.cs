@@ -15,20 +15,35 @@ namespace MidasTouch.Mvc.Models
 
 
 
-        public void Buy(string symbol, int buysharescount,Portfolio p)
+        public bool Buy(string symbol, int buysharescount,User u)
         {
+
             var share = new Share();
 
             share.Symbol = symbol;
             share.NumberOfShares = buysharescount;
             share.Price = LatestPrice;
+            var totalCost = (share.Price * share.NumberOfShares);
+
+            if (totalCost > u.AccountBalance)
+            {
+                return false;
+            }
+
+            if (u.Id<=0)
+            {
+                return false;
+            }
 
             var sh = new ShareHelper();
+            var db = sh._db;
             sh.SetShare(share);
-            var datashare=sh._db.Shares.Where(s => s.Symbol == symbol).LastOrDefault();
-            p.Shares.Add(datashare);
-            sh._db.SaveChanges();
+            var datashare=db.Shares.Where(s => s.Symbol == symbol).LastOrDefault();
+            u.AccountBalance -= totalCost;
+            u.Portfolio.Shares.Add(datashare);
+            db.SaveChanges();
 
+            return true;
         }
     }
 
