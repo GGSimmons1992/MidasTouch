@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MidasTouch.Data.Helpers;
 using MidasTouch.Mvc.Models;
 
 namespace MidasTouch.Mvc.Controllers
@@ -74,11 +77,17 @@ namespace MidasTouch.Mvc.Controllers
                     var Stock = response.Content.ReadAsAsync<BuyStock>().GetAwaiter().GetResult();
 
                     string MarketCapFormatted = Stock.MarketCap.ToString("#,##0");
-
                     
                     BuyStock.LatestPrice = Stock.LatestPrice;
                     BuyStock.CompanyName = Stock.CompanyName;
-                    BuyStock.Buy(symbol, buysharescount);
+
+                    var uh = new UserHelper();
+                    var userlist = uh.GetUsers();
+                    var userid = HttpContext.Session.GetInt32("userid");
+
+                    var myuser = userlist.FirstOrDefault(u=>u.Id==userid);
+
+                    BuyStock.Buy(symbol, buysharescount,myuser);
 
                     if (Stock.LatestVolume > buysharescount)
                     {
