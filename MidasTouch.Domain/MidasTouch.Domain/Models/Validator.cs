@@ -13,12 +13,9 @@ namespace MidasTouch.Domain.Models
 
       foreach (var prop in props)
       {
-        if (prop.GetType() == typeof(string))
+        if (prop.GetType() == typeof(string) && string.IsNullOrWhiteSpace(prop.GetValue(prop).ToString()))
         {
-          if (string.IsNullOrWhiteSpace(prop.GetValue(prop).ToString()))
-          {
-            return false;
-          }
+          return false;
         }
       }
 
@@ -31,12 +28,9 @@ namespace MidasTouch.Domain.Models
 
       foreach (var prop in props)
       {
-        if (prop.GetType() == typeof(int))
+        if (prop.GetType() == typeof(int) && (int)prop.GetValue(prop) < 1)
         {
-          if ((int)prop.GetValue(prop) < 1)
-          {
-            return false;
-          }
+          return false;
         }
       }
 
@@ -49,12 +43,9 @@ namespace MidasTouch.Domain.Models
 
       foreach (var prop in props)
       {
-        if (prop.GetType() == typeof(double))
+        if (prop.GetType() == typeof(double) && (double)prop.GetValue(prop) < 1)
         {
-          if ((double)prop.GetValue(prop) < 1)
-          {
-            return false;
-          }
+          return false;
         }
       }
 
