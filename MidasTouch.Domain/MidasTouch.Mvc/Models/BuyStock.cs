@@ -30,7 +30,7 @@ namespace MidasTouch.Mvc.Models
                 return false;
             }
 
-            if (u.Id<=0)
+            if (u.Id<=0 || u==null)
             {
                 return false;
             }

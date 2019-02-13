@@ -87,7 +87,7 @@ namespace MidasTouch.Mvc.Controllers
 
                     var myuser = userlist.FirstOrDefault(u=>u.Id==userid);
 
-                    BuyStock.Buy(symbol, buysharescount,myuser);
+                    BuyStock.Buy(symbol, buysharescount, myuser);
 
                     if (Stock.LatestVolume > buysharescount)
                     {
