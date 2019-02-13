@@ -24,28 +24,56 @@ namespace MidasTouch.Data.Helpers
 
         public long SetIdentity(Identity domidentity)
         {
-            if (_db == null) {var _db=_idb;}
-
-            _db.Identities.Add(domidentity);
-            return _db.SaveChanges();
+            if (_db != null)
+            {
+                _db.Identities.Add(domidentity);
+                return _db.SaveChanges();
+            }
+            else
+            {
+                _idb.Identities.Add(domidentity);
+                return _idb.SaveChanges();
+            }
+            
         }
 
         public List<Identity> GetIdentities()
         {
-            if (_db == null) { var _db = _idb; }
-            return _db.Identities.Include(x => x.Name).ToList();
+            if (_db != null)
+            {
+                return _db.Identities.Include(x => x.Name).ToList();
+            }
+            else
+            {
+                return _idb.Identities.Include(x => x.Name).ToList();
+            }
+            
         }
 
         public Identity GetIdentityByUser(User user)
         {
-            if (_db == null) { var _db = _idb; }
-            return _db.Identities.Include(x => x.Name).Where(i => i.Id == user.Identity.Id).FirstOrDefault();
+            if (_db != null)
+            {
+                return _db.Identities.Include(x => x.Name).Where(i => i.Id == user.Identity.Id).FirstOrDefault();
+            }
+            else
+            {
+                return _idb.Identities.Include(x => x.Name).Where(i => i.Id == user.Identity.Id).FirstOrDefault();
+            }
+                
         }
 
         public Identity GetIdentityByName(Name name)
         {
-            if (_db == null) { var _db = _idb; }
-            return  _db.Identities.Include(x => x.Name).Where(i => i.Name.Id == name.Id).FirstOrDefault();
+            if (_db != null)
+            {
+                return _db.Identities.Include(x => x.Name).Where(i => i.Name.Id == name.Id).FirstOrDefault();
+            }
+            else
+            {
+                return _idb.Identities.Include(x => x.Name).Where(i => i.Name.Id == name.Id).FirstOrDefault();
+            }
+            
         }
     }
 }
