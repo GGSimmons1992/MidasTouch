@@ -19,13 +19,13 @@ namespace MidasTouch.Domain.Models
 
     public bool Buy(string name, string ticker, int shares)
     {
-      var c = Market.Companies.Where(s => s.Name == name).FirstOrDefault();
+      var c = Market.Companies.FirstOrDefault(s => s.Name == name);
       if (c == null)
       {
         return false;
       }
 
-      var t = c.Tickers.Where(s => s.Symbol == ticker).FirstOrDefault();
+      var t = c.Tickers.FirstOrDefault(s => s.Symbol == ticker);
       if (t == null)
       {
           return false;
@@ -45,19 +45,19 @@ namespace MidasTouch.Domain.Models
 
     public bool Sell(string name, string ticker, int shares)
     {
-      var c = Market.Companies.Where(s => s.Name == name).FirstOrDefault();
+      var c = Market.Companies.FirstOrDefault(s => s.Name == name);
       if (c == null)
       {
         return false;
       }
 
-      var t = c.Tickers.Where(s => s.Symbol == ticker).FirstOrDefault();
+      var t = c.Tickers.FirstOrDefault(s => s.Symbol == ticker);
       if (t == null)
       {
         return false;
       }
 
-      var st = Portfolio.Shares.Where(s => s.Symbol == ticker).FirstOrDefault();
+      var st = Portfolio.Shares.FirstOrDefault(s => s.Symbol == ticker);
       if (st == null)
       {
           return false;
