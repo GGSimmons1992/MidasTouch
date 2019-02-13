@@ -22,20 +22,6 @@ namespace MidasTouch.Data.Helpers
             _idb = idb;
         }
 
-        public List<Portfolio> GetPortfolios()
-        {
-            if (_db != null)
-            {
-                var portfolioList = _db.Portfolios.Include(x => x.Shares).ToList();
-                return portfolioList;
-            }
-            else
-            {
-                var portfolioList = _idb.Portfolios.Include(x => x.Shares).ToList();
-                return portfolioList;
-            }
-            
-        }
 
         public Portfolio GetPortfolioByUser(User domuser)
         {

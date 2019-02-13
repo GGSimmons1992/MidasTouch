@@ -62,8 +62,11 @@ namespace MidasTouch.Tests
         public void Test_GetUser()
         {
             uh.SetUser(Sut);
-            Assert.NotNull(uh.GetUsers());
-            Assert.NotEmpty(uh.GetUsers());
+            var userlist = uh.GetUsers();
+            Assert.NotNull(userlist);
+
+            Assert.True((userlist[0]).IsValid());
+            Assert.False((userlist[0].Portfolio.Shares[0].Id <= 0));
         }
 
         [Fact]
