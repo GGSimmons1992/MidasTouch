@@ -27,25 +27,19 @@ namespace MidasTouch.Data.Helpers
 
         public long SetShare(Share share)
         {
-            if (_db == null) { var _db = _idb; }
-            _db.Shares.Add(share);
-            return _db.SaveChanges();
+            if (_db != null)
+            {
+                _db.Shares.Add(share);
+                return _db.SaveChanges();
+            }
+            else
+            {
+                _idb.Shares.Add(share);
+                return _idb.SaveChanges();
+            }
+           
         }
 
-        public List<Share> GetShares()
-        {
-            if (_db == null) { var _db = _idb; }
-            return _db.Shares.ToList();
-        }
-
-        public List<Share> GetSharesByUser(User domuser)
-        {
-            if (_db == null) { var _db = _idb; }
-            var domportfolio = ph.GetPortfolioByUser(domuser);
-            var pshares = domportfolio.Shares;
-
-            return pshares;
-        }
 
     }
 }
