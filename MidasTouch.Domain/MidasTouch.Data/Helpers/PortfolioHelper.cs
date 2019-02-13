@@ -24,23 +24,46 @@ namespace MidasTouch.Data.Helpers
 
         public long SetPortfolio(Portfolio domportfolio)
         {
-            if (_db == null) { var _db = _idb; }
-            _db.Portfolios.Add(domportfolio);
-            return _db.SaveChanges();
+            if (_db != null)
+            {
+                _db.Portfolios.Add(domportfolio);
+                return _db.SaveChanges();
+            }
+            else
+            {
+                _idb.Portfolios.Add(domportfolio);
+                return _idb.SaveChanges();
+            }
         }
 
         public List<Portfolio> GetPortfolios()
         {
-            if (_db == null) { var _db = _idb; }
-            var portfolioList = _db.Portfolios.Include(x => x.Shares).ToList();
-            return portfolioList;
+            if (_db != null)
+            {
+                var portfolioList = _db.Portfolios.Include(x => x.Shares).ToList();
+                return portfolioList;
+            }
+            else
+            {
+                var portfolioList = _idb.Portfolios.Include(x => x.Shares).ToList();
+                return portfolioList;
+            }
+            
         }
 
         public Portfolio GetPortfolioByUser(User domuser)
         {
-            if (_db == null) { var _db = _idb; }
-            var domportfolio = _db.Portfolios.Include(x => x.Shares).Where(p=>p.Id==domuser.Portfolio.Id).FirstOrDefault();
-            return domportfolio;
+            if (_db != null)
+            {
+                var domportfolio = _db.Portfolios.Include(x => x.Shares).Where(p => p.Id == domuser.Portfolio.Id).FirstOrDefault();
+                return domportfolio;
+            }
+            else
+            {
+                var domportfolio = _idb.Portfolios.Include(x => x.Shares).Where(p => p.Id == domuser.Portfolio.Id).FirstOrDefault();
+                return domportfolio;
+            }
+            
         }
 
     }
