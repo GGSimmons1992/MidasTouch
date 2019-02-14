@@ -20,7 +20,7 @@ namespace MidasTouch.Mvc.Models
 
             var share = new Share();
 
-            share.Symbol = symbol;
+            share.Symbol = symbol.ToUpper();
             share.NumberOfShares = buysharescount;
             share.Price = LatestPrice;
             var totalCost = (share.Price * share.NumberOfShares);

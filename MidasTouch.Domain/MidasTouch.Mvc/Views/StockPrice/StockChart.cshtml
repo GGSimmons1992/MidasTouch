@@ -12,21 +12,21 @@
             <label class="col-sm-5 control-label pr-0" for="ticker">Ticker:</label>
             <div class="col-sm-7 pl-0">
                 <input id="ticker" type="text" class="form-control input-sm"
-                       style="height:25px;width:100%" value="SPY" placeholder="SPY" />
+                       style="height:25px;width:100%" placeholder="SPY" />
             </div>
         </div>
         <div class="row form-group form-inline" style="margin-top:-5px;font-size:19px;">
             <label class="col-sm-5 control-label" for="startDate">Start Date:</label>
             <div class="col-sm-7 pl-0">
                 <input id="startDate" type="text" class="form-control input-sm"
-                       style="height:25px;width:100%" value="2019-01-01" placeholder="YYYY-MM-DD" />
+                       style="height:25px;width:100%" placeholder="YYYY-MM-DD" />
             </div>
         </div>
-        <div class="row form-group form-inline" style="margin-top:-5px font-size:19px;">
+        <div class="row form-group form-inline" style="margin-top:-5px; font-size:19px;">
             <label class="col-sm-5 control-label" for="endDate">End Date:</label>
             <div class="col-sm-7 pl-0">
                 <input id="endDate" type="text" class="form-control input-sm"
-                       style="height:25px;width:100%" value="2019-02-06" placeholder="YYYY-MM-DD" />
+                       style="height:25px;width:100%" placeholder="YYYY-MM-DD" />
             </div>
         </div>
         <div class="row form-group form-inline" style="margin-top:20px">
@@ -48,8 +48,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script>
-        createStockChart();
-
+        
         $('#btnCreateChart').click(function () {
             createStockChart();
         });
@@ -58,7 +57,7 @@
             google.charts.load('current', { 'packages': ['corechart', 'controls'] });
             google.charts.setOnLoadCallback(drawChart);
             var chart_div = document.getElementById('chart');
-            var ticker = document.getElementById('ticker').value;
+            var ticker = String(document.getElementById('ticker').value).toUpperCase();
             var startDate = document.getElementById('startDate').value;
             var endDate = document.getElementById('endDate').value;
 
