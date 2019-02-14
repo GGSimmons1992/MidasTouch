@@ -1,21 +1,31 @@
-﻿<nav class="navbar navbar-inverse">
+﻿<nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
             <div id="headlogo">
-                <a class="text-light" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img class="rounded" alt="logo" height="100" width="175" src="https://imgur.com/uuk4AM1.jpg">
+                <div class="rounded" id="logosibling"></div>
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img class="rounded pb-1" id="logo" alt="logo" height="100" width="175" src="https://imgur.com/uuk4AM1.jpg">
                 </a>
-
             </div>
         </div>
 
-        <div class="rounded" id="NavBarLinks">
-            <a class="rounded" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            <a class="rounded" asp-area="" asp-controller="" asp-action="">Trade</a>
-            <a class="rounded" asp-area="" asp-controller="Stock" asp-action="Stock">Quotes</a>
-            <a class="rounded" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
-            <a class="rounded" asp-area="" asp-controller="" asp-action="">Account</a>
-        </div>
+        <div class="rounded d-inline-flex" id="NavBarLinks">
+            <div class="mr-2">
+                <a class="rounded-2 pr-2 pl-2" id="homenav" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </div>
+            <div class="mr-2">
+                <a class="rounded-2 pr-2 pl-2" id="quotenav" asp-area="" asp-controller="Stock" asp-action="Stock">Trade</a>
+            </div>
+            <div class="mr-2">
+                <a class="rounded-2 pr-2 pl-2" id="chartnav" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
+            </div>
+            <div class="mr-2">
+                <a class="rounded-2 pr-2 pl-2" id="accountnav" asp-area="" asp-controller="" asp-action="">Account</a>
 
+            </div>
+            <div class="mr-2">
+                <a class="rounded-2 pr-2 pl-2" id="loginnav" asp-area="" asp-controller="" asp-action="">Login</a>
+            </div>
+        </div>
     </div>
 </nav>

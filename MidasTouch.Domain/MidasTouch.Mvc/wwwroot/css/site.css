@@ -51,13 +51,13 @@ html body *{
 
 /*NAVBAR*/
 
-#header {
+/*#header {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 35px /*adjust this as needed*/;
+    height: 35px;
     background-color: transparent;
-}
+}*/
 
 .bg-img {
     /* The image used */
@@ -85,7 +85,7 @@ html body *{
 
 .bg-img-stockcharts {
     /* The image used */
-    background-image: url("https://imgur.com/OqkGI2h.jpg");
+    background-image: url("https://imgur.com/qAtBrv8.jpg");
     min-height: 400px;
     /* Center and scale the image nicely */
     background-position: center;
@@ -97,24 +97,35 @@ html body *{
 
 
 
+/*#NavBarLinks:hover {
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+    }*/
 
-#NavBarLinks{
+#homenav, #quotenav, #chartnav, #accountnav, #loginnav {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #ffbf00;
     font-size: 25px;
-    background-color: transparent;
-    
     opacity: .75;
     filter: alpha(opacity=50);
     border-radius: 10px;
 }
 
-#NavBarLinks:hover {
-        opacity: 1.0;
-        filter: alpha(opacity=100);
-    }
-
-    #NavBarLinks > a {
+#homenav:hover, #quotenav:hover, #chartnav:hover, #accountnav:hover, #loginnav:hover {
         color: #ffffff;
         text-decoration: none;
         background-color: #ffbf00;
-    }
+        font-size: 25px;
+        border-radius: 10px;
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+}
 
+#headlogo{
+    position: relative;
+}
+
+#logo{
+    z-index: 999;
+}
