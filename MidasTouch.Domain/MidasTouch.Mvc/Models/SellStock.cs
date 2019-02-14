@@ -24,13 +24,7 @@ namespace MidasTouch.Mvc.Models
 
       var datauser = db.Users.Where(du => du.Id == User.Id).FirstOrDefault();
       var dataportfolio = db.Portfolios.Include(x=>x.Shares).Where(dp => dp.Id == User.Portfolio.Id).FirstOrDefault();
-        //foreach (var item in portfolio.Shares)
-        //{
-        //  if (item.NumberOfShares == 0)
-        //  {
-        //    portfolio.Shares.Remove(item);
-        //  }
-        //}
+        
       var i = 0;
       while (SellSharesCount > 0)
       {
@@ -46,7 +40,7 @@ namespace MidasTouch.Mvc.Models
           datauser.AccountBalance += (dataportfolio.Shares[i].NumberOfShares * dataportfolio.Shares[i].Price);
           dataportfolio.Shares[i].NumberOfShares = 0;
           i++;
-          //dshares.RemoveAt(0);
+          
 
           
         }
