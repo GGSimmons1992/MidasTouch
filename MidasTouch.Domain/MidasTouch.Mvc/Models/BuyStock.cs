@@ -42,10 +42,14 @@ namespace MidasTouch.Mvc.Models
 
             var sh = new ShareHelper();
             var db = sh._db;
+            var datauser = db.Users.Where(du=>du.Id==u.Id).FirstOrDefault();
+            var dataportfolio = db.Portfolios.Where(p => p.Id == u.Portfolio.Id).FirstOrDefault();
+
             sh.SetShare(share);
             var datashare=db.Shares.Where(s => s.Symbol == symbol).LastOrDefault();
-            u.AccountBalance -= totalCost;
-            u.Portfolio.Shares.Add(datashare);
+            
+            dataportfolio.Shares.Add(datashare);
+            datauser.AccountBalance -= totalCost;
             db.SaveChanges();
 
             return true;
