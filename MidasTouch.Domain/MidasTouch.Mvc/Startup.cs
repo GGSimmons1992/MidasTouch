@@ -57,7 +57,7 @@ namespace MidasTouch.Mvc
         {
             
 
-            if (true) //Replace true to env.IsDevelopment() when bug is fixed.
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
