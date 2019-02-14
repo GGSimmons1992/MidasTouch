@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MidasTouch.Data.Helpers;
 using MidasTouch.Mvc.Models;
 
 namespace MidasTouch.Mvc.Controllers
@@ -55,6 +58,13 @@ namespace MidasTouch.Mvc.Controllers
         [HttpPost]
         public IActionResult Buy(string symbol, int buysharescount)
         {
+            //Delete the lines below when we have a working login --V
+            var testuserlist = (new UserHelper()).GetUsers();
+            var mytestuser = testuserlist[0];
+            HttpContext.Session.SetString("First", mytestuser.Identity.Name.First);
+            HttpContext.Session.SetInt32("userid", mytestuser.Id);
+            //Delete the lines above when we have a working login --^
+
             var BuyStock = new BuyStock();
 
             var IEXTrading_API_PATH = "https://api.iextrading.com/1.0/stock/{0}/quote";
@@ -74,14 +84,23 @@ namespace MidasTouch.Mvc.Controllers
                     var Stock = response.Content.ReadAsAsync<BuyStock>().GetAwaiter().GetResult();
 
                     string MarketCapFormatted = Stock.MarketCap.ToString("#,##0");
-
-                    BuyStock.Buy(symbol, buysharescount);
-                    BuyStock.LatestPrice = Stock.LatestPrice;
-                    BuyStock.CompanyName = Stock.CompanyName;
+                    
+                    
 
                     if (Stock.LatestVolume > buysharescount)
                     {
                         BuyStock.BuySharesCount = buysharescount;
+
+                        BuyStock.LatestPrice = Stock.LatestPrice;
+                        BuyStock.CompanyName = Stock.CompanyName;
+
+                        var uh = new UserHelper();
+                        var userlist = uh.GetUsers();
+                        var userid = HttpContext.Session.GetInt32("userid");
+
+                        var myuser = userlist.FirstOrDefault(u => u.Id == userid);
+
+                        BuyStock.Buy(symbol, buysharescount, myuser);
                     }
 
                 }

@@ -18,8 +18,6 @@
   </ItemGroup>
 
 
-  <ItemGroup>
-    <ProjectReference Include="..\MidasTouch.Domain\MidasTouch.Domain.csproj" />
-  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1Development_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

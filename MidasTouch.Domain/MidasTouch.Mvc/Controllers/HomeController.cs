@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MidasTouch.Data.Helpers;
 using MidasTouch.Mvc.Models;
 
 namespace MidasTouch.Mvc.Controllers
@@ -8,6 +10,7 @@ namespace MidasTouch.Mvc.Controllers
     {
         public IActionResult Index()
         {
+            
             return View();
         }
 

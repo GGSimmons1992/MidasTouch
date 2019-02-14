@@ -10,7 +10,7 @@ using MidasTouch.Data;
 namespace MidasTouch.Data.Migrations
 {
     [DbContext(typeof(MidasTouchDBContext))]
-    [Migration("20190208221154_first_migration")]
+    [Migration("20190214015257_first_migration")]
     partial class first_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,11 @@ namespace MidasTouch.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email");
+
                     b.Property<int?>("NameId");
+
+                    b.Property<string>("Password");
 
                     b.HasKey("Id");
 

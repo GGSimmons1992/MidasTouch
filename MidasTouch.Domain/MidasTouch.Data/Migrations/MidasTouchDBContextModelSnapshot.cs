@@ -38,7 +38,11 @@ namespace MidasTouch.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email");
+
                     b.Property<int?>("NameId");
+
+                    b.Property<string>("Password");
 
                     b.HasKey("Id");
 
