@@ -89,7 +89,11 @@ namespace MidasTouch.Data.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<string>("State");
+
                     b.Property<string>("Symbol");
+
+                    b.Property<DateTime>("TimeStamp");
 
                     b.HasKey("Id");
 

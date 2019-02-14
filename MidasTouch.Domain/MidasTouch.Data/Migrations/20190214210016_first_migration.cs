@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MidasTouch.Data.Migrations
@@ -90,6 +91,8 @@ namespace MidasTouch.Data.Migrations
                     NumberOfShares = table.Column<int>(nullable: false),
                     Symbol = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
+                    State = table.Column<string>(nullable: true),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
                     PortfolioId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

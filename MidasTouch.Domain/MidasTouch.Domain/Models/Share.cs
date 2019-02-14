@@ -11,6 +11,13 @@ namespace MidasTouch.Domain.Models
     public int NumberOfShares { get; set; }
     public string Symbol { get; set; }
     public double Price { get; set; }
+    public string State { get; set; }
+    public DateTime TimeStamp { get; set; }
+
+    public Share()
+    {
+        TimeStamp = DateTime.Now;
+    }
 
     public override bool IsValid()
     {
