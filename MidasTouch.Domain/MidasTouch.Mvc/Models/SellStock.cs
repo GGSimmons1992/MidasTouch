@@ -1,4 +1,5 @@
-﻿using MidasTouch.Data.Helpers;
+﻿using Microsoft.EntityFrameworkCore;
+using MidasTouch.Data.Helpers;
 using MidasTouch.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -18,34 +19,34 @@ namespace MidasTouch.Mvc.Models
     public void Sell()
     {
       var ph = new PortfolioHelper();
-      var portfolio = ph.GetPortfolioByUser(User);
+      var db = ph._db;
+     
 
-      //foreach (var item in portfolio.Shares)
-      //{
-      //  if (item.NumberOfShares == 0)
-      //  {
-      //    portfolio.Shares.Remove(item);
-      //  }
-      //}
-
+      var datauser = db.Users.Where(du => du.Id == User.Id).FirstOrDefault();
+      var dataportfolio = db.Portfolios.Include(x=>x.Shares).Where(dp => dp.Id == User.Portfolio.Id).FirstOrDefault();
+        
+      var i = 0;
       while (SellSharesCount > 0)
       {
-        if (SellSharesCount < portfolio.Shares[0].NumberOfShares)
+        if (SellSharesCount < dataportfolio.Shares[i].NumberOfShares)
         {
-          portfolio.Shares[0].NumberOfShares -= SellSharesCount;
-          User.AccountBalance += (portfolio.Shares[0].Price * SellSharesCount);
+          dataportfolio.Shares[i].NumberOfShares -= SellSharesCount;
+          datauser.AccountBalance += (dataportfolio.Shares[i].Price * SellSharesCount);
           SellSharesCount = 0;
         }
         else
         {
-          SellSharesCount -= portfolio.Shares[0].NumberOfShares;
-          User.AccountBalance += (portfolio.Shares[0].NumberOfShares * portfolio.Shares[0].Price);
-          portfolio.Shares[0].NumberOfShares = 0;
-          portfolio.Shares.RemoveAt(0);
+          SellSharesCount -= dataportfolio.Shares[i].NumberOfShares;
+          datauser.AccountBalance += (dataportfolio.Shares[i].NumberOfShares * dataportfolio.Shares[i].Price);
+          dataportfolio.Shares[i].NumberOfShares = 0;
+          i++;
+          
+
+          
         }
       }
 
-      ph._db.SaveChanges();
+      db.SaveChanges();
     }
   }
 }
