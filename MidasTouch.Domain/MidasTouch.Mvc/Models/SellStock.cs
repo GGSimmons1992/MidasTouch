@@ -1,4 +1,5 @@
-﻿using MidasTouch.Data.Helpers;
+﻿using Microsoft.EntityFrameworkCore;
+using MidasTouch.Data.Helpers;
 using MidasTouch.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace MidasTouch.Mvc.Models
      
 
       var datauser = db.Users.Where(du => du.Id == User.Id).FirstOrDefault();
-      var dataportfolio = db.Portfolios.Where(dp => dp.Id == User.Portfolio.Id).FirstOrDefault();
+      var dataportfolio = db.Portfolios.Include(x=>x.Shares).Where(dp => dp.Id == User.Portfolio.Id).FirstOrDefault();
         //foreach (var item in portfolio.Shares)
         //{
         //  if (item.NumberOfShares == 0)
