@@ -55,7 +55,9 @@ namespace MidasTouch.Mvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            
+
+            if (true) //Replace true to env.IsDevelopment() when bug is fixed.
             {
                 app.UseDeveloperExceptionPage();
             }
