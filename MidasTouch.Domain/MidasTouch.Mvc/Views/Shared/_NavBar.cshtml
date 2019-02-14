@@ -1,28 +1,23 @@
-﻿<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" id="midasnav">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MidasTouch</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
+﻿<header class="bg-img rounded-bottom">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div id="headlogo">
+                    <a class="text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img class="rounded" height="100" width="175" src="https://imgur.com/uuk4AM1.jpg">
+                    </a>
 
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Stock" asp-action="Stock">Quotes</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
-                    </li>
-
-                </ul>
+                </div>
             </div>
+
+            <div class="rounded" id="NavBarLinks">
+                <a class="rounded" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                <a class="rounded" asp-area="" asp-controller="" asp-action="">Trade</a>
+                <a class="rounded" asp-area="" asp-controller="Stock" asp-action="Stock">Quotes</a>
+                <a class="rounded" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
+                <a class="rounded" asp-area="" asp-controller="" asp-action="">Account</a>
+            </div>
+
         </div>
     </nav>
 </header>
