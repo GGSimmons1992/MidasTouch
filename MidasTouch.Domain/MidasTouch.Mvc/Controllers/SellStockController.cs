@@ -51,6 +51,7 @@ namespace MidasTouch.Mvc.Controllers
             var userId = HttpContext.Session.GetInt32("userid");
             var myuser = userlist.FirstOrDefault(u => u.Id == userId);
             SellStock.User = myuser;
+            SellStock.Symbol = symbol.ToUpper();
             SellStock.Sell();
           }
 

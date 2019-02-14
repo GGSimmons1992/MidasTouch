@@ -9,26 +9,26 @@
 <div class="d-flex bd-highlight mb-3">
     <div class="d-flex bd-highlight mb-3">
 
-        <form asp-action="Create" class="">
+        <form asp-action="Stock" asp-controller="Stock" class="">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
 
             <div class="row form-group form-inline" style="margin-top:5px;font-size:25px;">
                 <label class="col-sm-5 control-label" for="ticker">Ticker:</label>
                 <div class="col-sm-7 pl-0">
                     <input asp-for="Symbol" name="symbol" class="form-control input-sm"
-                           style="height:35px;width:100%" value="SPY" placeholder="SPY" />
+                           style="height:35px;width:100%" placeholder="SPY" />
                 </div>
             </div>
 
-
             <div class="form-group">
-                <input type="submit" value="Search" id="sub" class="btn btn-primary" />
+                <button type="submit" id="sub" class="btn btn-primary">
+                    Search
+                </button>
 
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buyModal">
                     Buy
                 </button>
+
                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sellModal">
                     Sell
                 </button>

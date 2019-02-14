@@ -28,22 +28,19 @@ namespace MidasTouch.Mvc.Models
       var i = 0;
       while (SellSharesCount > 0)
       {
-        if (SellSharesCount < dataportfolio.Shares[i].NumberOfShares)
+        if (SellSharesCount < dataportfolio.Shares[i].NumberOfShares && dataportfolio.Shares[i].Symbol == Symbol)
         {
           dataportfolio.Shares[i].NumberOfShares -= SellSharesCount;
           datauser.AccountBalance += (dataportfolio.Shares[i].Price * SellSharesCount);
           SellSharesCount = 0;
         }
-        else
+        else if (dataportfolio.Shares[i].Symbol == Symbol)
         {
           SellSharesCount -= dataportfolio.Shares[i].NumberOfShares;
           datauser.AccountBalance += (dataportfolio.Shares[i].NumberOfShares * dataportfolio.Shares[i].Price);
           dataportfolio.Shares[i].NumberOfShares = 0;
-          i++;
-          
-
-          
         }
+        i++;
       }
 
       db.SaveChanges();
