@@ -26,14 +26,19 @@
             <div class="form-group">
                 <input type="submit" value="Search" id="sub" class="btn btn-primary" />
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Trade
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buyModal">
+                    Buy
                 </button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#sellModal">
+                    Sell
+                </button>
+
             </div>
         </form>
     </div>
 
     <partial name="_TradeStock" />
+    <partial name="_SellStock" />
     <div class="p-2 bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
 </div>
 
