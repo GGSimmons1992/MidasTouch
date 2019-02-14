@@ -1,23 +1,20 @@
-﻿<header class="bg-img rounded-bottom">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <div id="headlogo">
-                    <a class="text-light" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img class="rounded" alt="logo" height="100" width="175" src="https://imgur.com/uuk4AM1.jpg">
-                    </a>
+﻿
 
-                </div>
-            </div>
-
-            <div class="rounded" id="NavBarLinks">
-                <a class="rounded" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                <a class="rounded" asp-area="" asp-controller="" asp-action="">Trade</a>
-                <a class="rounded" asp-area="" asp-controller="Stock" asp-action="Stock">Quotes</a>
-                <a class="rounded" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
-                <a class="rounded" asp-area="" asp-controller="" asp-action="">Account</a>
-            </div>
-
-        </div>
-    </nav>
-</header>
+@if ((string)ViewData["Title"] == "Home")
+{
+    <header class="bg-img rounded-bottom">
+        <partial name="_NavBarPartial" />
+    </header>
+}
+else if ((string)ViewData["Title"] == "Stock")
+{
+    <header class="bg-img-stock rounded-bottom">
+        <partial name="_NavBarPartial" />
+    </header>
+}
+else if ((string)ViewData["Title"] == "Stock Chart")
+{
+    <header class="bg-img-stockcharts rounded-bottom">
+        <partial name="_NavBarPartial" />
+    </header>
+}
