@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MidasTouch.Data.Helpers;
 using MidasTouch.Mvc.Models;
 
 namespace MidasTouch.Mvc.Controllers
@@ -8,6 +10,14 @@ namespace MidasTouch.Mvc.Controllers
     {
         public IActionResult Index()
         {
+
+            //Delete the lines below when we have a working login --V
+            var userlist = (new UserHelper()).GetUsers();
+            var myuser = userlist[0];
+            HttpContext.Session.SetString("First",myuser.Identity.Name.First);
+            HttpContext.Session.SetInt32("userid",myuser.Id);
+            //Delete the lines above when we have a working login --^
+
             return View();
         }
 

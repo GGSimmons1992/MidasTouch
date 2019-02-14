@@ -25,12 +25,17 @@ namespace MidasTouch.Mvc.Models
             share.Price = LatestPrice;
             var totalCost = (share.Price * share.NumberOfShares);
 
-            if (totalCost > u.AccountBalance)
+            if (u == null)
             {
                 return false;
             }
 
-            if (u.Id<=0 || u==null)
+            if (u.Id<=0)
+            {
+                return false;
+            }
+
+            if (totalCost > u.AccountBalance)
             {
                 return false;
             }

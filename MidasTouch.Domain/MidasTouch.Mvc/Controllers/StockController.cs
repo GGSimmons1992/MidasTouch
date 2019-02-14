@@ -80,7 +80,7 @@ namespace MidasTouch.Mvc.Controllers
                     
                     BuyStock.LatestPrice = Stock.LatestPrice;
                     BuyStock.CompanyName = Stock.CompanyName;
-
+                    
                     var uh = new UserHelper();
                     var userlist = uh.GetUsers();
                     var userid = HttpContext.Session.GetInt32("userid");
