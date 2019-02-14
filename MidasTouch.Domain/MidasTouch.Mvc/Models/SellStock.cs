@@ -41,6 +41,8 @@ namespace MidasTouch.Mvc.Models
           dataportfolio.Shares[i].NumberOfShares = 0;
           i++;
           
+
+          
         }
       }
 
