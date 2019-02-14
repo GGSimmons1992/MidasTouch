@@ -1,4 +1,5 @@
-﻿using MidasTouch.Domain.Models;
+﻿using MidasTouch.Data.Helpers;
+using MidasTouch.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,24 +17,26 @@ namespace MidasTouch.Mvc.Models
 
     public void Sell()
     {
-      var shares = ;
+      var ph = new PortfolioHelper();
+      var portfolio = ph.GetPortfolioByUser(User);
 
       while (SellSharesCount > 0)
       {
-        if (SellSharesCount < shares[0].NumberOfShares)
+        if (SellSharesCount < portfolio.Shares[0].NumberOfShares)
         {
-          shares[0].NumberOfShares -= shares;
-          User.AccountBalance += (shares[0].Price * SellSharesCount);
+          portfolio.Shares[0].NumberOfShares -= SellSharesCount;
+          User.AccountBalance += (portfolio.Shares[0].Price * SellSharesCount);
           SellSharesCount = 0;
         }
         else
         {
-          SellSharesCount -= shares[0].NumberOfShares;
-          User.AccountBalance += (shares[0].NumberOfShares * shares[0].Price);
-          User.Portfolio.Shares.Remove(shares[0]);
-          shares.RemoveAt(0);
+          SellSharesCount -= portfolio.Shares[0].NumberOfShares;
+          User.AccountBalance += (portfolio.Shares[0].NumberOfShares * portfolio.Shares[0].Price);
+          portfolio.Shares.RemoveAt(0);
         }
       }
+
+      ph._db.SaveChanges();
     }
   }
 }
