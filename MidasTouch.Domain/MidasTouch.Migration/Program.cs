@@ -14,7 +14,6 @@ namespace MidasTouch.Migration
         static void Main(string[] args)
         {
             Console.WriteLine("Why are you here?");
-            
         }
 
         static void CreateTestUser()
@@ -24,14 +23,16 @@ namespace MidasTouch.Migration
             {
                 NumberOfShares = 100,
                 Price = 50,
-                Symbol = "GOOG"
+                Symbol = "GOOG",
+                State = "Buy"
             };
 
             var Share2 = new Share()
             {
                 NumberOfShares = 100,
                 Price = 100,
-                Symbol = "GOOG"
+                Symbol = "GOOG",
+                State = "Buy"
             };
 
             var Sut = new User()

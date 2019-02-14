@@ -10,7 +10,7 @@ using MidasTouch.Data;
 namespace MidasTouch.Data.Migrations
 {
     [DbContext(typeof(MidasTouchDBContext))]
-    [Migration("20190214015257_first_migration")]
+    [Migration("20190214210016_first_migration")]
     partial class first_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,7 +91,11 @@ namespace MidasTouch.Data.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<string>("State");
+
                     b.Property<string>("Symbol");
+
+                    b.Property<DateTime>("TimeStamp");
 
                     b.HasKey("Id");
 
