@@ -13,8 +13,15 @@ namespace MidasTouch.Mvc.Controllers
     public class SellStockController : Controller
     {
     [HttpPost]
-    public IActionResult Buy(string symbol, int sellsharescount)
+    public IActionResult Sell(string symbol, int sellsharescount)
     {
+      //Delete the lines below when we have a working login --V
+      var testuserlist = (new UserHelper()).GetUsers();
+      var mytestuser = testuserlist[0];
+      HttpContext.Session.SetString("First", mytestuser.Identity.Name.First);
+      HttpContext.Session.SetInt32("userid", mytestuser.Id);
+      //Delete the lines above when we have a working login --^
+
       var SellStock = new SellStock();
 
       var IEXTrading_API_PATH = "https://api.iextrading.com/1.0/stock/{0}/quote";
@@ -50,7 +57,7 @@ namespace MidasTouch.Mvc.Controllers
         }
       }
 
-      return View("Stock");
+      return RedirectToAction("DisplayStock", "Stock");
     }
   }
 }

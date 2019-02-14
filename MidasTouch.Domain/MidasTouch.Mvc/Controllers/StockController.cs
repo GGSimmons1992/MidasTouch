@@ -53,6 +53,11 @@ namespace MidasTouch.Mvc.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult DisplayStock()
+        {
+            return View("Stock");
+        }
 
 
         [HttpPost]
