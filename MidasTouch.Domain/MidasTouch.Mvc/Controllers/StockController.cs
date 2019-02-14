@@ -78,20 +78,22 @@ namespace MidasTouch.Mvc.Controllers
 
                     string MarketCapFormatted = Stock.MarketCap.ToString("#,##0");
                     
-                    BuyStock.LatestPrice = Stock.LatestPrice;
-                    BuyStock.CompanyName = Stock.CompanyName;
                     
-                    var uh = new UserHelper();
-                    var userlist = uh.GetUsers();
-                    var userid = HttpContext.Session.GetInt32("userid");
-
-                    var myuser = userlist.FirstOrDefault(u=>u.Id==userid);
-
-                    BuyStock.Buy(symbol, buysharescount, myuser);
 
                     if (Stock.LatestVolume > buysharescount)
                     {
                         BuyStock.BuySharesCount = buysharescount;
+
+                        BuyStock.LatestPrice = Stock.LatestPrice;
+                        BuyStock.CompanyName = Stock.CompanyName;
+
+                        var uh = new UserHelper();
+                        var userlist = uh.GetUsers();
+                        var userid = HttpContext.Session.GetInt32("userid");
+
+                        var myuser = userlist.FirstOrDefault(u => u.Id == userid);
+
+                        BuyStock.Buy(symbol, buysharescount, myuser);
                     }
 
                 }
