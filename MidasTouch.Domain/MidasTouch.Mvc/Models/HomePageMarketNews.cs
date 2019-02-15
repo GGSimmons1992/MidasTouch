@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MidasTouch.Mvc.Models
 {
@@ -10,5 +11,7 @@ namespace MidasTouch.Mvc.Models
         public string Url { get; set; }
         public string Summary { get; set; }
         public string Related { get; set; }
+
+        public List<HomePageMarketNews> MarketNews { get; set; }
     }
 }
