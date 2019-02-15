@@ -61,7 +61,9 @@ namespace MidasTouch.Mvc.Models
       {
         Symbol = Symbol.ToUpper(),
         NumberOfShares = TradeSharesCount,
-        Price = LatestPrice
+        Price = LatestPrice,
+        State = State,
+        TimeStamp = DateTime.Now
       };
 
       sh.SetShare(share);
