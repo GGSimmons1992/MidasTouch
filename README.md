@@ -4,21 +4,19 @@
 + [Gary Simmons](https://github.com/GGSimmons1992)
 + [Timothy Freeman](https://github.com/freemantm)
 ## Technologies:
-+ HTML
-+ CSS
-+ Javascript
-+ D3JS
 + C#
++ SQL
++ ASP.NET MVC
++ HTML
++ Javascript
++ CSS
 + Xunit testing
 + EntityFramework
-+ SQL
 + Azure Databases
-+ ASP.NET MVC
 + Git
 + GitHub
 + AGILE:SCRUM through PivotalTracker
 + Azure DevOps
-+ Docker
 
 [![Build status](https://dev.azure.com/garygarthsimmons/MidasTouch/_apis/build/status/MidasTouch-CI)](https://dev.azure.com/garygarthsimmons/MidasTouch/_build/latest?definitionId=7)
 
