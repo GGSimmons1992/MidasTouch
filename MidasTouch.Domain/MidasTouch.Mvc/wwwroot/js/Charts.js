@@ -114,5 +114,4 @@ function createStockChart() {
             alert('Failed to create the chart. Please try it again.');
             });
     }
-    drawChart();
 }
