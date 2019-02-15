@@ -343,3 +343,4 @@ ASALocalRun/
 /MidasTouch.Domain/MidasTouch.Tests/HelperTests/PortfolioHelperTests.cs
 /MidasTouch.Domain/MidasTouch.Tests/HelperTests/IdentityHelperTests.cs
 /MidasTouch.Domain/MidasTouch.Mvc/appsettings.Development.json
+/MidasTouch.Domain/MidasTouch.DataAPI/appsettings.Development.json
