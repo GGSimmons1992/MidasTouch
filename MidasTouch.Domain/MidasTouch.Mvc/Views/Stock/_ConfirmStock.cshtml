@@ -12,27 +12,23 @@
 
             <div class="modal-body">
 
-                @using (Html.BeginForm(actionName: "Trade", controllerName: "Stock"))
-                {
-                    @Html.DropDownListFor(s => s.State, (IEnumerable<SelectListItem>)ViewBag.state)
-                    <br />
+                
 
-                    @Html.LabelFor(s => s.Symbol)
-                    @Html.TextBoxFor(s => s.Symbol, new { @class = "form-control" })
+                @Html.LabelFor(s => s.Symbol)
+                @Html.TextBoxFor(s => s.Symbol, new { @class = "form-control" })
 
-                    @Html.LabelFor(b => b.TradeSharesCount)
-                    @Html.TextBoxFor(b => b.TradeSharesCount, new { @class = "form-control" })
+                @Html.LabelFor(b => b.TradeSharesCount)
+                @Html.TextBoxFor(b => b.TradeSharesCount, new { @class = "form-control" })
 
-                    <div class="modal-footer">
+                <div class="modal-footer">
 
-                        <button type="submit" class="btn btn-primary">Trade</button>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">
-                            Trade
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Trade</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">
+                        Trade
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-                    </div>
-                }
+                </div>
             </div>
         </div>
     </div>
