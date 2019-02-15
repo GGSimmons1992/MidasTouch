@@ -12,7 +12,7 @@
 
             <div class="modal-body">
 
-                @using (Html.BeginForm(actionName: "Trade", controllerName: "Stock"))
+                @using (Html.BeginForm(actionName: "Confirm", controllerName: "Stock"))
                 {
                     @Html.DropDownListFor(s => s.State, (IEnumerable<SelectListItem>)ViewBag.state)
                     <br />
@@ -25,7 +25,7 @@
 
                     <div class="modal-footer">
 
-                        <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">
                             Trade
                         </button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

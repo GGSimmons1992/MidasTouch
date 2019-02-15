@@ -13,6 +13,9 @@ namespace MidasTouch.Mvc.Controllers
   public class StockController : Controller
   {
     public static double StockPrice { get; set; }
+    public static string Symbol { get; set; }
+    public static int TradeSharesCount { get; set; }
+    public static string State { get; set; }
 
     public IActionResult Stock()
     {
@@ -61,6 +64,13 @@ namespace MidasTouch.Mvc.Controllers
         }
       }
       return View();
+    }
+
+    public void Confirm(string symbol, int tradesharescount, string state)
+    {
+      Symbol = symbol;
+      TradeSharesCount = tradesharescount;
+      State = state;
     }
 
     [HttpPost]
