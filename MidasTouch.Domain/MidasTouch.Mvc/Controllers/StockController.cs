@@ -13,9 +13,6 @@ namespace MidasTouch.Mvc.Controllers
   public class StockController : Controller
   {
     public static double StockPrice { get; set; }
-    public static string Symbol { get; set; }
-    public static int TradeSharesCount { get; set; }
-    public static string State { get; set; }
 
     public IActionResult Stock()
     {
@@ -66,15 +63,8 @@ namespace MidasTouch.Mvc.Controllers
       return View();
     }
 
-    public void Confirm(string symbol, int tradesharescount, string state)
-    {
-      Symbol = symbol;
-      TradeSharesCount = tradesharescount;
-      State = state;
-    }
-
     [HttpPost]
-    public IActionResult Trade(string symbol, int buysharescount, string state)
+    public IActionResult Trade(string symbol, int tradesharescount, string state)
     {
       //Delete the lines below when we have a working login --V
       var testuserlist = (new UserHelper()).GetUsers();
@@ -107,10 +97,10 @@ namespace MidasTouch.Mvc.Controllers
           var TradeStock = new TradeStock()
           {
             User = myuser,
-            TradeSharesCount = buysharescount,
+            TradeSharesCount = tradesharescount,
             LatestPrice = Stock.LatestPrice,
             CompanyName = Stock.CompanyName,
-            Symbol = symbol,
+            Symbol = symbol.ToUpper(),
             State = state,
             LatestVolume = Stock.LatestVolume
           };
@@ -118,7 +108,12 @@ namespace MidasTouch.Mvc.Controllers
           TradeStock.Trade();
         }
       }
-
+      var states = new List<SelectListItem>()
+          {
+            new SelectListItem { Value = "Buy", Text = "Buy" },
+            new SelectListItem { Value = "Sell", Text = "Sell" }
+          };
+      ViewBag.state = states;
       return View("Stock");
     }
   }
