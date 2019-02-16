@@ -4,90 +4,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MidasTouch.Data.Helpers;
 
 namespace MidasTouch.Mvc.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
-        public ActionResult Index()
+        
+        public ActionResult Login()
+        {
+            //Delete the lines below when we have a working login --V
+            var testuserlist = (new UserHelper()).GetUsers();
+            var mytestuser = testuserlist[0];
+            HttpContext.Session.SetString("First", mytestuser.Identity.Name.First);
+            HttpContext.Session.SetInt32("userid", mytestuser.Id);
+            //Delete the lines above when we have a working login --^
+            return View();
+        }
+
+        public ActionResult Register()
         {
             return View();
         }
 
-        // GET: User/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Signout()
         {
-            return View();
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index","Home");
         }
 
-        // GET: User/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: User/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
