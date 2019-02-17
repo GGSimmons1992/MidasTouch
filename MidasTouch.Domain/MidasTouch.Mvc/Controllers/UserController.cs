@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MidasTouch.Data.Helpers;
+using MidasTouch.Domain.Models;
 
 namespace MidasTouch.Mvc.Controllers
 {
@@ -31,6 +32,18 @@ namespace MidasTouch.Mvc.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index","Home");
+        }
+
+        //public ActionResult ConfirmUser(User enterred)
+        //{
+        //    var uh = new UserHelper();
+        //    return Login();
+        //}
+
+        public ActionResult Error(string message)
+        {
+            ViewData["errormessage"] = message;
+            return PartialView("_ErrorPartial");
         }
 
 

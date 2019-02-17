@@ -47,7 +47,8 @@ namespace MidasTouch.Tests
                     {
                         First = "John",
                         Last = "Schmidt"
-                    }
+                    },
+                    Email="John.Schmidt@MidasTouch.com"
                 }
             };
         }
@@ -78,6 +79,18 @@ namespace MidasTouch.Tests
             Assert.NotNull(name);
             var datauser=uh.GetUserByName(name);
 
+            var datashare50 = (datauser.Portfolio.Shares).FirstOrDefault(s => s.Price == 50);
+            Assert.NotNull(datashare50);
+            Assert.True(datauser.Portfolio.Value == Sut.Portfolio.Value);
+
+        }
+
+        [Fact]
+        public void Test_GetUserByEmail()
+        {
+            uh.SetUser(Sut);
+            var datauser = uh.GetUserByEmail(Sut.Identity.Email);
+            Assert.NotNull(datauser);
             var datashare50 = (datauser.Portfolio.Shares).FirstOrDefault(s => s.Price == 50);
             Assert.NotNull(datashare50);
             Assert.True(datauser.Portfolio.Value == Sut.Portfolio.Value);
