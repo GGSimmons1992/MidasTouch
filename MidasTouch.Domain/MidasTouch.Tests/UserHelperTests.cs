@@ -84,5 +84,16 @@ namespace MidasTouch.Tests
 
         }
 
+        [Fact]
+        public void Test_GetUserByEmail()
+        {
+            uh.SetUser(Sut);
+            var datauser = uh.GetUserByEmail(Sut.Identity.Email);
+            Assert.NotNull(datauser);
+            var datashare50 = (datauser.Portfolio.Shares).FirstOrDefault(s => s.Price == 50);
+            Assert.NotNull(datashare50);
+            Assert.True(datauser.Portfolio.Value == Sut.Portfolio.Value);
+
+        }
     }
 }
