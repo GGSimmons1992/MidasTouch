@@ -109,7 +109,14 @@ namespace MidasTouch.Mvc.Controllers
             LatestVolume = Stock.LatestVolume
           };
 
-          TradeStock.Trade();
+          if (TradeStock.Trade())
+          {
+            ViewData["message"] = state + " of " + tradesharescount + " " + symbol.ToUpper() + " successful";
+          }
+          else
+          {
+            ViewData["message"] = state + " of " + tradesharescount + " " + symbol.ToUpper() + " unsuccessful";
+          };
         }
       }
       var states = new List<SelectListItem>()
