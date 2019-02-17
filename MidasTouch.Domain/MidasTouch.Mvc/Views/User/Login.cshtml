@@ -4,5 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Login</h1>
+@if (ViewData["message"] != null)
+{
+    <h1>@ViewData["message"]</h1>
+}
+
 

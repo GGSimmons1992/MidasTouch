@@ -70,15 +70,25 @@ namespace MidasTouch.Tests
             var db = uh._idb;
 
             uh.SetUser(User);
-            Assert.True(sh.SetShare(Share3)>0);
+            Assert.True(sh.SetShare(Share3) > 0);
 
-            var lastshare=db.Shares.Where(s => s.Symbol == Share3.Symbol).LastOrDefault();
+            var lastshare = db.Shares.Where(s => s.Symbol == Share3.Symbol).LastOrDefault();
             var dataname = db.Names.Where(n => n.First == User.Identity.Name.First).FirstOrDefault();
-            var datauser=uh.GetUserByName(dataname);
+            var datauser = uh.GetUserByName(dataname);
             datauser.Portfolio.Shares.Add(lastshare);
-            Assert.True(db.SaveChanges()> 0);
+            Assert.True(db.SaveChanges() > 0);
             Assert.True(datauser.Portfolio.Shares.Count == 3);
 
+        }
+
+        [Fact]
+        public void Test_FailSetShares()
+        {
+            var db = uh._idb;
+
+            uh.SetUser(User);
+            Share3.NumberOfShares = 0;
+            Assert.False(sh.SetShare(Share3) > 0);
         }
 
     }

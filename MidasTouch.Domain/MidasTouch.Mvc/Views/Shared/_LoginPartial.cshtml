@@ -14,10 +14,10 @@
                 @using (Html.BeginForm("ConfirmUser", "User"))
                 {
                     @Html.LabelFor(m => m.Identity.Email, "Enter Email")<br>
-                    @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email" })
+                    @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email",required="required" })
                     <br>
                     @Html.LabelFor(m => m.Identity.Password, "Enter password")<br>
-                    @Html.PasswordFor(m => m.Identity.Password)
+                    @Html.PasswordFor(m => m.Identity.Password, new { @required = "required" })
                     <br>
 
                     <button type="submit">
