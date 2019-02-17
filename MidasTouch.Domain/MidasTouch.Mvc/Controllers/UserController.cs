@@ -58,8 +58,8 @@ namespace MidasTouch.Mvc.Controllers
                 return Error("Passwords do not match");
             }
 
-            HttpContext.Session.SetString("First", enterred.Identity.Name.First);
-            HttpContext.Session.SetInt32("userid", enterred.Id);
+            HttpContext.Session.SetString("First", datauser.Identity.Name.First);
+            HttpContext.Session.SetInt32("userid", datauser.Id);
 
             return Login();
         }
