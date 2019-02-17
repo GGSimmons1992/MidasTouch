@@ -81,5 +81,15 @@ namespace MidasTouch.Tests
 
         }
 
+        [Fact]
+        public void Test_FailSetShares()
+        {
+            var db = uh._idb;
+
+            uh.SetUser(User);
+            Share3.NumberOfShares = 0;
+            Assert.False(sh.SetShare(Share3) > 0);
+        }
+
     }
 }
