@@ -10,7 +10,8 @@
     <p>@ViewData["msg"]</p>
 }
 
-
+@if (@ViewData["Good"] == null)
+{
 <div class="container-fluid bd-highlight mb-3">
     <div class="d-flex bd-highlight mb-3">
         @using (Html.BeginForm("ValidateRegistration", "User"))
@@ -40,4 +41,7 @@
 
     </div>
 </div>
+
+}
+
 

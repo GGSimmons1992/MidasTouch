@@ -93,6 +93,7 @@ namespace MidasTouch.Mvc.Controllers
             (new UserHelper()).SetUser(gooduser);
 
             ViewData["msg"] = $"Welcome {newuser.Identity.Name.First} {newuser.Identity.Name.Last}, please log in with credentials to continue";
+            ViewData["Good"] = true;
             return View("Register");
         }
 
