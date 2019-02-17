@@ -15,12 +15,7 @@ namespace MidasTouch.Mvc.Controllers
         
         public ActionResult Login()
         {
-            //Delete the lines below when we have a working login --V
-            var testuserlist = (new UserHelper()).GetUsers();
-            var mytestuser = testuserlist[0];
-            HttpContext.Session.SetString("First", mytestuser.Identity.Name.First);
-            HttpContext.Session.SetInt32("userid", mytestuser.Id);
-            //Delete the lines above when we have a working login --^
+            
             return View();
         }
 
