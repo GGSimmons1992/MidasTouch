@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using MidasTouch.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MidasTouch.Data.Helpers
 {
@@ -35,7 +32,7 @@ namespace MidasTouch.Data.Helpers
                 var domportfolio = _idb.Portfolios.Include(x => x.Shares).Where(p => p.Id == domuser.Portfolio.Id).FirstOrDefault();
                 return domportfolio;
             }
-            
+
         }
 
     }

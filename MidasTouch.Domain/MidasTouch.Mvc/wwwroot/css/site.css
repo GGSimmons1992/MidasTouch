@@ -86,6 +86,18 @@ html body *{
     position: relative;
 }
 
+.bg-img-else {
+    /* The image used */
+    background-image: url("https://imgur.com/siU6fnF.jpg");
+    min-height: 400px;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Needed to position the navbar */
+    position: relative;
+}
+
 
 #homenav, #quotenav, #chartnav, #accountnav, #loginnav {
     color: #ffffff;

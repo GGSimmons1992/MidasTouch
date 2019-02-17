@@ -1,66 +1,118 @@
-﻿@*@model IEnumerable<MidasTouch.Mvc.Models.>
+﻿@model List<MidasTouch.Domain.Models.Share>
 
-    @{
-        ViewData["Title"] = "OrderHistory";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+@{
+    ViewData["Title"] = "Order History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-    <h1>OrderHistory</h1>
 
-    <table class="table table-dark">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.OrderId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Toppings)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Size)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Crust)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ModifiedDate)
-                </th>
 
-            </tr>
-        </thead>
 
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="container-fluid">
+    <div class="container-fluid">
+        <h1>Order History</h1>
+        <table class="table col-7 border">
+
+            <thead class="bg-primary">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PizzaId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Toppings)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Size)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Crust)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModifiedDate)
-                    </td>
+
+                    <th>
+                        @Html.DisplayName("State")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Symbol")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Shares Count")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Price")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Time")
+                    </th>
+
+
                 </tr>
-            }
-        </tbody>
-    </table>*@
+            </thead>
+
+            <tbody>
+                @foreach (var order in Model)
+                {
+
+                    @if (order.State == "Buy")
+                    {
+                        <tr class="bg-success">
+                            <td>
+                                <p>
+                                    @order.State
+                                </p>
+
+                            </td>
+
+                            <td>
+                                <p>
+                                    @order.Symbol
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.NumberOfShares
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@order.Price
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.TimeStamp
+                                </p>
+                            </td>
+
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="bg-danger">
+                            <td>
+                                <p>
+                                    @order.State
+                                </p>
+
+                            </td>
+
+                            <td>
+                                <p>
+                                    @order.Symbol
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.NumberOfShares
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@order.Price
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.TimeStamp
+                                </p>
+                            </td>
+
+                        </tr>
+                    }
+
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>
