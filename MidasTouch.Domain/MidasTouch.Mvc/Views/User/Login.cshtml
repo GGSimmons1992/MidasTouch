@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HCA
+@model MidasTouch.Domain.Models.User
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,6 +9,24 @@
 @if (ViewData["message"] != null)
 {
     <h1>@ViewData["message"]</h1>
+}
+
+
+@if (HCA.HttpContext.Session.GetInt32("userid") == null)
+{
+    @using (Html.BeginForm("ConfirmUser", "User"))
+    {
+        @Html.LabelFor(m => m.Identity.Email, "Enter Email")<br>
+        @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email", required = "required" })
+        <br>
+        @Html.LabelFor(m => m.Identity.Password, "Enter password")<br>
+        @Html.PasswordFor(m => m.Identity.Password, new { @required = "required" })
+        <br>
+
+        <button type="submit">
+            Enter
+        </button>
+    }
 }
 
 
