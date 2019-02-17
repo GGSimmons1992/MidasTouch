@@ -1,0 +1,118 @@
+﻿@model List<MidasTouch.Domain.Models.Share>
+
+@{
+    ViewData["Title"] = "Order History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <h1>Order History</h1>
+        <table class="table col-7 border">
+
+            <thead class="bg-primary">
+                <tr>
+
+                    <th>
+                        @Html.DisplayName("State")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Symbol")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Shares Count")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Price")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Time")
+                    </th>
+
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var order in Model)
+                {
+
+                    @if (order.State == "Buy")
+                    {
+                        <tr class="bg-success">
+                            <td>
+                                <p>
+                                    @order.State
+                                </p>
+
+                            </td>
+
+                            <td>
+                                <p>
+                                    @order.Symbol
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.NumberOfShares
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@order.Price
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.TimeStamp
+                                </p>
+                            </td>
+
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr class="bg-danger">
+                            <td>
+                                <p>
+                                    @order.State
+                                </p>
+
+                            </td>
+
+                            <td>
+                                <p>
+                                    @order.Symbol
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.NumberOfShares
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@order.Price
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.TimeStamp
+                                </p>
+                            </td>
+
+                        </tr>
+                    }
+
+
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+</div>

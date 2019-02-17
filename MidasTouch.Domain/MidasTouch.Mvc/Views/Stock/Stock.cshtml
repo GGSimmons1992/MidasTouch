@@ -34,13 +34,12 @@
     </div>
 
     <partial name="_TradeStock" />
-    <partial name="_ConfirmStock" />
     <div class="p-2 bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
 </div>
 
 
 @section scripts{
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
 
     <script>
         createStockChart();
@@ -53,7 +52,7 @@
             google.charts.load('current', { 'packages': ['corechart', 'controls'] });
             google.charts.setOnLoadCallback(drawChart);
             var chart_div = document.getElementById('chart');
-            var ticker = document.getElementById('Symbol').value;
+            var ticker = String(document.getElementById('Symbol').value).toUpperCase();
 
             var viewStartDate = new Date('@DateTime.Today');
             viewStartDate.setYear(viewStartDate.getFullYear() - 1);

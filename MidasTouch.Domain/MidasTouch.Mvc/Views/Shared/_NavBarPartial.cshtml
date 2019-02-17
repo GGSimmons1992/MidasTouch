@@ -5,7 +5,6 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <div id="headlogo">
-                <div class="rounded" id="logosibling"></div>
                 <a asp-area="" asp-controller="Home" asp-action="Index">
                     <img class="rounded pb-1" id="logo" alt="logo" height="100" width="175" src="https://imgur.com/uuk4AM1.jpg">
                 </a>
@@ -26,7 +25,7 @@
                     <a class="rounded-2 pr-2 pl-2" id="chartnav" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
                 </div>
                 <div class="mr-2">
-                    <a class="rounded-2 pr-2 pl-2" id="accountnav" asp-area="" asp-controller="User" asp-action="Account">Account</a>
+                    <a class="rounded-2 pr-2 pl-2" id="accountnav" asp-area="" asp-controller="Account" asp-action="Orders">Account</a>
                 </div>
                 <div class="mr-2">
                     <a class="rounded-2 pr-2 pl-2" id="loginnav" asp-area="" asp-controller="User" asp-action="Signout">Sign Out</a>
@@ -35,14 +34,12 @@
             else
             {
                 <div class="mr-2">
-                    <a class="rounded-2 pr-2 pl-2" id="loginnav" data-toggle="modal" data-target="#LoginPartial">Login</a>
+                    <a class="rounded-2 pr-2 pl-2" id="accountnav" data-toggle="modal" data-target="#LoginPartial">Login</a>
                 </div>
                 <div class="mr-2">
                     <a class="rounded-2 pr-2 pl-2" id="loginnav" asp-area="" asp-controller="User" asp-action="Register">Register</a>
                 </div>
             }
-
-
         </div>
     </div>
 </nav>

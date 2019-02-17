@@ -29,7 +29,7 @@ body {
 
 
 .footer {
-  position: absolute;
+  /*position: relative;*/
   bottom: 0;
   width: 100%;
   white-space: nowrap;
@@ -86,6 +86,18 @@ html body *{
     position: relative;
 }
 
+.bg-img-else {
+    /* The image used */
+    background-image: url("https://imgur.com/siU6fnF.jpg");
+    min-height: 400px;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Needed to position the navbar */
+    position: relative;
+}
+
 
 #homenav, #quotenav, #chartnav, #accountnav, #loginnav {
     color: #ffffff;
@@ -113,4 +125,35 @@ html body *{
 
 #logo{
     z-index: 999;
+}
+
+#newsurl{
+    font-size: 25px;
+    text-decoration: none;
+    font-weight: bolder;
+    border-color: gold;
+}
+#newsurl:hover{
+    color: #ffbf00;
+}
+
+#newssummary{
+    font-size: 25px;
+    color: black;
+   
+}
+
+#newstitle{
+    background-color: cadetblue;
+}
+
+
+.news {
+    text-align: center;
+    position: relative;
+    font-size: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
 }

@@ -1,249 +1,36 @@
-﻿@{
+﻿@model MidasTouch.Mvc.Models.HomePageMarketNews
+
+@{
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Market</h1>
 
-<div class="container-fluid">
-    <div class="row">
-        <label for="company">Search a company:</label>
-        <div class="input-group">
-            <input id="company" list="companiesList" class="form-control col-3 mb-5 "
-                   placeholder="Company's symbol (e.g. aapl for Apple, googl for Google)"
-                   type="text">
-            <datalist id="companiesList"></datalist>
-            <span class="">
-                <button class="btn btn-primary" type="button" placeholder="Search" onclick="search()"></button>
-            </span>
+<div>
+    <h1 class="text-center text-light rounded-bottom" id="newstitle">
+        Market News
+    </h1>
+    @foreach (var news in Model.MarketNews)
+    {
+        <div class="container-fluid">
+            <div id="news" class="">
+                <div class="row col-5 mb-1">
+                    <a id="newsurl" href="@news.Url">@news.Headline</a>
+                </div>
+                <div class="row col-5 mb-1">
+                    <div id="newssummary" class="">
+                        @news.Summary
+                    </div>
+                </div>
+                <div class="row col-5 mb-3">
+                    <div>
+                        @news.Datetime
+                        @news.Source
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-4 text-center" id="companyLogo"></div>
-        <div class="col-8">
-            <h1 id="companyName"></h1>
-            <p id="companyInfo"></p>
-            <p id="companyCEO"></p>
-        </div>
-    </div>
-    <div class="row">
-        <div id="news" class="col-4"></div>
-        <div id="chart" class=""></div>
-    </div>
+    }
+
 </div>
 
-<!-- jQuery 3.3.1 -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-
-<!-- Bootstrap requirement -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-
-<!-- Bootstrap 4.1.1 plugins -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-
-<!-- Google Charts plugin -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<script>
-    // This works on all devices/browsers, and uses IndexedDBShim as a final fallback
-    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB ||
-        window.shimIndexedDB;
-    // References to some window.IDB* objects:
-    window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-    if (!window.indexedDB) {
-        window.alert("This browser DOES NOT support a stable version of IndexedDB, therefore the app will not work"
-            + "properly! Sorry :(")
-    }
-    var db;
-    const dbName = "FinancialAppDb";
-    const dbVersion = 1;
-    const storeName = "companies";
-    const indexName = "nameIndex";
-    /**
-     * Get a determined ObjectStore from DB.
-     * param {string} objectStoreName Name of the ObjectStore that will be open
-     * param {string} mode Either "readonly" or "readwrite"
-     */
-    function getObjectStore(objectStoreName, mode) {
-        return db.transaction(objectStoreName, mode).objectStore(objectStoreName);
-    }
-    /**
-     * Open and populate the database. If it does not exists or it is a old version then creates a new one
-     */
-    function openDB() {
-        console.log("Opening db...");
-        // Open (or create) the database
-        var openRequest = indexedDB.open(dbName, dbVersion);
-        // Error handler
-        openRequest.onerror = function (event) {
-            window.alert("Error on open/create the database: " + event.target.result.errorCode);
-        };
-        // Create the schema if does not exists or if the version is different
-        openRequest.onupgradeneeded = function (event) {
-            console.log("DB does not exists, creating a new one...");
-            let db = event.target.result;
-            let objectStore = db.createObjectStore(storeName, { keyPath: "symbol" });
-            objectStore.createIndex(indexName, "name", { unique: false });
-            console.log("DB created!");
-        };
-        // Populate the DB
-        openRequest.onsuccess = function (event) {
-            console.log("Populating DB...");
-            db = event.target.result;
-            // Disabling the user interaction until the DB is populated
-            $("#company").attr("disabled", true).attr("placeholder", "Loading database");
-            $(".btn").attr("disabled", true).text("Wait");
-            $.ajax({
-                url: "https://api.iextrading.com/1.0/ref-data/symbols?filter=symbol,name",
-                success: function (result) {
-                    let objectStore = getObjectStore("companies", "readwrite");
-                    objectStore.transaction.oncomplete = () => {
-                        // Enabling the user interaction
-                        $("#company").attr("disabled", false).attr("placeholder", "Insert a company name here");
-                        $(".btn").attr("disabled", false).text("Search");
-                        console.log("DB populated!");
-                    };
-                    result.forEach(function (record) {
-                        objectStore.put(record);
-                        $("#companiesList").append("<option value='" + record.name + "'>");
-                    });
-                }
-            });
-        };
-    }
-    // Load Google Charts API
-    google.charts.load('current', {
-        'packages': ['corechart']
-    });
-    // Setting a default message if a AJAX error happen
-    $(document).ajaxError(function () {
-        alert("An error occurred!");
-    });
-    // Start the process of db opening ad populating
-    $(document).ready(openDB());
-    /**
-     * Search the company's data.
-     */
-    function search() {
-        let company = $("#company").val(); // Get the value inside the input
-        // Get an index
-        let objectStore = getObjectStore(storeName, "readonly");
-        let index = objectStore.index(indexName);
-        // Search the company by name
-        let getCompany = index.get(company);
-        console.log(getCompany);
-        getCompany.onsuccess = function (event) {
-            // Check if the result is not undefined
-            if (!event.target.result) {
-                window.alert("Company not found! Try again.");
-                return;
-            }
-            let companySymbol = event.target.result.symbol;
-            $.ajax({
-                url: "https://api.iextrading.com/1.0/stock/" + companySymbol + "/company",
-                success: function (result) {
-                    setCompanyName(result.companyName);
-                    setCompanyInfo(result.description);
-                    setCompanyCEO(result.CEO);
-                    setCompanyLogo(companySymbol);
-                    setNews(companySymbol);
-                    drawChart(companySymbol);
-                }
-            });
-        };
-        getCompany.onerror = event => { window.alert("Company not found! Error: " + event.target.errorCode) };
-    }
-    /**
-     * Draw chart that demonstrates the company's stock price variation in the past 30 days.
-     * param {string} company Company symbol
-     */
-    function drawChart(company) {
-        $.ajax({
-            url: "https://api.iextrading.com/1.0/stock/" + company + "/chart",
-            success: function (result) {
-                let options = {
-                    title: 'Company Performance',
-                    curveType: 'function',
-                    legend: {
-                        position: 'bottom',
-                        hAxis: {
-                            title: "Day"
-                        },
-                        vAxis: {
-                            title: "Stock Value"
-                        }
-                    }
-                };
-                // Create a DataTable object and add two columns in it
-                let data = new google.visualization.DataTable();
-                data.addColumn('date', 'Day');
-                data.addColumn('number', 'Value');
-                // Add each record in the DataTable object using the each function from jQuery
-                $.each(result, function (key, record) {
-                    data.addRow([new Date(record.date), record.close]);
-                });
-                // Using Array.prototype.map
-                // let rows = result.map(record => { return [new Date(record.date), record.close] } );
-                // data.addRows(rows);
-                // Draw the chart
-                let chart = new google.visualization.LineChart(document.getElementById('chart'));
-                chart.draw(data, options);
-            }
-        });
-    }
-    /**
-     * Set the news content inside the respective HTML element.
-     * param {string} company Company's symbol
-     */
-    function setNews(company) {
-        $.ajax({
-            url: "https://api.iextrading.com/1.0/stock/" + company + "/news/last/5",
-            success: function (result) {
-                $("#news").html("");
-                $.each(result, function (key, value) {
-                    $("#news").append("<p><a target='_blank' href='" + value.url + "'>" + value.headline +
-                        " by " + value.source + "</a></p>");
-                });
-            }
-        });
-    }
-    /**
-     * Set the company logo inside the respective HTML element.
-     * param {string} company Company's symbol
-     */
-    function setCompanyLogo(company) {
-        $.ajax({
-            url: "https://api.iextrading.com/1.0/stock/" + company + "/logo",
-            success: function (result) {
-                $("#companyLogo").html("<img src=\"" + result.url + "\" alt=\"" + company + "\'s logo\">")
-            }
-        });
-    }
-    /**
-     * Set the company name inside the respective HTML element.
-     * param {string} name Company's name
-     */
-    function setCompanyName(name) {
-        $("#companyName").text(name)
-    }
-    /**
-     * Set the company's info inside the respective HTML element.
-     * param {string} info
-     */
-    function setCompanyInfo(info) {
-        $("#companyInfo").text(info)
-    }
-    /**
-     * Set the company's CEO inside the respective HTML element.
-     * param {string} ceo
-     */
-    function setCompanyCEO(ceo) {
-        $("#companyCEO").text("CEO: " + ceo)
-    }
-</script>

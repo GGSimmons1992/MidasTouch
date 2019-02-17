@@ -17,13 +17,14 @@
     </environment>
     <link href="https://fonts.googleapis.com/css?family=EB+Garamond" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
     <partial name="_NavBar" />
 
-    <div class="container-fluid">
-        <main role="main" class="pb-3">
+    <div class="">
+        <main role="main" id="mainbody" class="pb-3">
             @RenderBody()
             <partial name="_LoginPartial" />
         </main>
