@@ -66,13 +66,7 @@ namespace MidasTouch.Mvc.Controllers
     [HttpPost]
     public IActionResult Trade(string symbol, int tradesharescount, string state)
     {
-      //Delete the lines below when we have a working login --V
-      var testuserlist = (new UserHelper()).GetUsers();
-      var mytestuser = testuserlist[0];
-      HttpContext.Session.SetString("First", mytestuser.Identity.Name.First);
-      HttpContext.Session.SetInt32("userid", mytestuser.Id);
-      //Delete the lines above when we have a working login --^
-
+      
       var IEXTrading_API_PATH = "https://api.iextrading.com/1.0/stock/{0}/quote";
 
       IEXTrading_API_PATH = string.Format(IEXTrading_API_PATH, symbol);
@@ -89,10 +83,20 @@ namespace MidasTouch.Mvc.Controllers
         {
           var Stock = response.Content.ReadAsAsync<TradeStock>().GetAwaiter().GetResult();
 
+          if (HttpContext.Session.GetInt32("userid") == null)
+          {
+              ViewData["message"] = "Please login";
+              return View("Login", "User");
+          }
           var uh = new UserHelper();
           var userlist = uh.GetUsers();
           var userid = HttpContext.Session.GetInt32("userid");
           var myuser = userlist.FirstOrDefault(u => u.Id == userid);
+
+          if (myuser == null)
+          {
+            return RedirectToAction("Login","User");
+          }
 
           var TradeStock = new TradeStock()
           {

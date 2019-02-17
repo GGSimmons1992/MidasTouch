@@ -27,6 +27,11 @@ namespace MidasTouch.Data.Helpers
 
         public long SetShare(Share share)
         {
+            if (share.NumberOfShares == 0)
+            {
+                return 0;
+            }
+
             if (_db != null)
             {
                 _db.Shares.Add(share);

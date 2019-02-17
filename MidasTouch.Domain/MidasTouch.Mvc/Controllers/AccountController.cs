@@ -20,15 +20,18 @@ namespace MidasTouch.Mvc.Controllers
 
         public IActionResult Orders()
         {
-            var testuserlist = (new UserHelper()).GetUsers();
-            var mytestuser = testuserlist[0];
+            if (HttpContext.Session.GetInt32("userid") == null)
+            {
+                ViewData["message"] = "Please login";
+                return View("Login", "User");
+            }
 
-            HttpContext.Session.SetString("First", mytestuser.Identity.Name.First);
-            HttpContext.Session.SetInt32("userid", mytestuser.Id);
-
+            var userlist = (new UserHelper()).GetUsers();
+            var myuser = userlist.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("userid"));
+            
 
             var portfolioHelper = new PortfolioHelper();
-            var UserPortfolio = portfolioHelper.GetPortfolioByUser(mytestuser).Shares.ToList();
+            var UserPortfolio = portfolioHelper.GetPortfolioByUser(myuser).Shares.ToList();
 
 
             //var Portfolio = new PortfolioViewModel();

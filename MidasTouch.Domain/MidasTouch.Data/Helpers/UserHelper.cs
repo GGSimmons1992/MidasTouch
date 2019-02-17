@@ -113,6 +113,37 @@ namespace MidasTouch.Data.Helpers
                 return GetUserDependancies(user);
             }
             
+
+
+        }
+
+        public User GetUserByEmail(string Email)
+        {
+            if (_db != null)
+            {
+                var user = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity)
+                .Where(u => u.Identity.Email == Email).FirstOrDefault();
+
+                if (user == null)
+                {
+                    return user;
+                }
+
+                return GetUserDependancies(user);
+            }
+            else
+            {
+                var user = _idb.Users.Include(x => x.Portfolio).Include(y => y.Identity)
+                .Where(u => u.Identity.Email == Email).FirstOrDefault();
+
+                if (user == null)
+                {
+                    return user;
+                }
+
+                return GetUserDependancies(user);
+            }
+
         }
 
     }
