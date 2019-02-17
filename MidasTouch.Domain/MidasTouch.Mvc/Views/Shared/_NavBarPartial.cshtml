@@ -16,14 +16,15 @@
             <div class="mr-2">
                 <a class="rounded-2 pr-2 pl-2" id="homenav" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
             </div>
-            <div class="mr-2">
-                <a class="rounded-2 pr-2 pl-2" id="quotenav" asp-area="" asp-controller="Stock" asp-action="Stock">Trade</a>
-            </div>
-            <div class="mr-2">
-                <a class="rounded-2 pr-2 pl-2" id="chartnav" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
-            </div>
+
             @if (HCA.HttpContext.Session.GetInt32("userid") != null)
             {
+                <div class="mr-2">
+                    <a class="rounded-2 pr-2 pl-2" id="quotenav" asp-area="" asp-controller="Stock" asp-action="Stock">Trade</a>
+                </div>
+                <div class="mr-2">
+                    <a class="rounded-2 pr-2 pl-2" id="chartnav" asp-area="" asp-controller="StockPrice" asp-action="StockChart">Charts</a>
+                </div>
                 <div class="mr-2">
                     <a class="rounded-2 pr-2 pl-2" id="accountnav" asp-area="" asp-controller="User" asp-action="Account">Account</a>
                 </div>
