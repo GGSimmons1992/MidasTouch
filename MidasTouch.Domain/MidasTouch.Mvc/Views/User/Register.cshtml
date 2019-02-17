@@ -1,0 +1,38 @@
+﻿@model MidasTouch.Mvc.Models.NewUserModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Register</h1>
+@if (ViewData["msg"] != null)
+{
+    <p>@ViewData["msg"]</p>
+}
+
+
+@using (Html.BeginForm("ValidateRegistration", "User"))
+{
+
+    @Html.LabelFor(m => m.Identity.Name.First, "Enter first name")<br>
+    @Html.TextBoxFor(m => m.Identity.Name.First,new {@required="required" })
+    <br>
+    @Html.LabelFor(m => m.Identity.Name.Last, "Enter last name")<br>
+    @Html.TextBoxFor(m => m.Identity.Name.Last, new { @required = "required" })
+    <br>
+    @Html.LabelFor(m => m.Identity.Email, "Enter Email")<br>
+    @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email" , required = "required"})
+    <br>
+    @Html.LabelFor(m => m.Identity.Password, "Create password")<br>
+    @Html.PasswordFor(m => m.Identity.Password, new { @required = "required" })
+    <br>
+    @Html.LabelFor(m => m.Secondary, "Re-enter password")<br>
+    @Html.PasswordFor(m => m.Secondary, new { @required = "required" })
+    <br>
+
+
+    <button type="submit">
+        Enter
+    </button>
+}
+
