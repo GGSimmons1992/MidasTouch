@@ -32,7 +32,6 @@ body {
 }
 
 html body *{
-    font-family: 'Open Sans', sans-serif;
     font-size: 15px;
 }
 
@@ -93,26 +92,6 @@ html body *{
 }
 
 
-#homenav, #quotenav, #chartnav, #accountnav, #loginnav {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: #ffbf00;
-    font-size: 25px;
-    opacity: .75;
-    filter: alpha(opacity=50);
-    border-radius: 10px;
-}
-
-#homenav:hover, #quotenav:hover, #chartnav:hover, #accountnav:hover, #loginnav:hover {
-        color: #ffffff;
-        text-decoration: none;
-        background-color: #ffbf00;
-        font-size: 25px;
-        border-radius: 10px;
-        opacity: 1.0;
-        filter: alpha(opacity=100);
-}
-
 #headlogo{
     position: relative;
 }
@@ -148,8 +127,12 @@ html body *{
 }
 
 .pagelabel {
-    font-family: 'Hind Siliguri', sans-serif;
     font-size: 30px;
 }
 
+.navbar {
+    border-bottom-width: 0px !important;
+    margin-left: -3px;
+    margin-right: -.25px;
+}
 

@@ -20,7 +20,7 @@
                 Portfolio Value: $@ViewData["PortfolioValue"]
             </div>
 
-            <table class="table table-condensed table-bordered">
+            <table class="table rounded table-condensed table-bordered">
 
                 <thead class="bg-primary text-center">
                     <tr>
@@ -69,17 +69,17 @@
                                 </td>
                                 <td>
                                     <p>
-                                        @order.NumberOfShares
+                                        @order.NumberOfShares.ToString("#,##0")
                                     </p>
                                 </td>
                                 <td>
                                     <p>
-                                        $@order.Price
+                                        $@order.Price.ToString("#,##0")
                                     </p>
                                 </td>
                                 <td>
                                     <p>
-                                        $@((order.Price) * (order.NumberOfShares))
+                                        $@(((order.Price) * (order.NumberOfShares)).ToString("#,##0"))
                                     </p>
                                 </td>
                                 <td>
@@ -107,17 +107,17 @@
                                 </td>
                                 <td>
                                     <p>
-                                        @order.NumberOfShares
+                                        @order.NumberOfShares.ToString("#,##0")
                                     </p>
                                 </td>
                                 <td>
                                     <p>
-                                        $@order.Price
+                                        $@order.Price.ToString("#,##0")
                                     </p>
                                 </td>
                                 <td>
                                     <p>
-                                        $@((order.Price) * (-order.NumberOfShares))
+                                        $@(((order.Price) * (-order.NumberOfShares)).ToString("#,##0"))
                                     </p>
                                 </td>
                                 <td>

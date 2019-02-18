@@ -9,11 +9,11 @@
     Market News
 </h1>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex flex-wrap justify-content-center">
 
     @foreach (var news in Model.MarketNews)
     {
-        <div class="container-fluid border rounded shadow mr-2 ml-2">
+        <div class="container-fluid border rounded shadow mr-2 ml-2 col-5">
             <div id="news" class="">
                 <div class="row mb-1 text-center">
                     <a id="newsurl" href="@news.Url">@news.Headline</a>
