@@ -42,24 +42,28 @@ namespace MidasTouch.Mvc.Controllers
         HttpResponseMessage response = client.GetAsync(IEXTrading_API_PATH).GetAwaiter().GetResult();
         if (response.IsSuccessStatusCode)
         {
-          var Stock = response.Content.ReadAsAsync<StockQuote>().GetAwaiter().GetResult();
+            var Stock = response.Content.ReadAsAsync<StockQuote>().GetAwaiter().GetResult();
 
-          string MarketCapFormatted = Stock.MarketCap.ToString("#,##0");
+            string MarketCapFormatted = Stock.MarketCap.ToString("#,##0");
 
-          ViewBag.Symbol = Stock.Symbol;
-          ViewBag.CompanyName = Stock.CompanyName;
-          ViewBag.Price = Stock.LatestPrice;
-          StockPrice = Stock.LatestPrice;
-          ViewBag.MarketCap = MarketCapFormatted;
-          ViewBag.PercentChange = Stock.ChangePercent;
-          var states = new List<SelectListItem>()
-          {
-            new SelectListItem { Value = "Buy", Text = "Buy" },
-            new SelectListItem { Value = "Sell", Text = "Sell" }
-          };
-          ViewBag.state = states;
+            ViewBag.Symbol = Stock.Symbol;
+            ViewBag.CompanyName = Stock.CompanyName;
+            ViewBag.Price = Stock.LatestPrice;
+            StockPrice = Stock.LatestPrice;
+            ViewBag.MarketCap = MarketCapFormatted;
+            ViewBag.PercentChange = Stock.ChangePercent;
+        }
+        else
+        {
+            ViewData["message"] = $"{symbol} is not a valid ticker";
         }
       }
+      var states = new List<SelectListItem>()
+      {
+      new SelectListItem { Value = "Buy", Text = "Buy" },
+      new SelectListItem { Value = "Sell", Text = "Sell" }
+      };
+      ViewBag.state = states;
       return View();
     }
 
@@ -109,7 +113,14 @@ namespace MidasTouch.Mvc.Controllers
             LatestVolume = Stock.LatestVolume
           };
 
-          TradeStock.Trade();
+          if (TradeStock.Trade())
+          {
+            ViewData["message"] = state + " of " + tradesharescount + " " + symbol.ToUpper() + " successful";
+          }
+          else
+          {
+            ViewData["message"] = state + " of " + tradesharescount + " " + symbol.ToUpper() + " unsuccessful";
+          };
         }
       }
       var states = new List<SelectListItem>()
