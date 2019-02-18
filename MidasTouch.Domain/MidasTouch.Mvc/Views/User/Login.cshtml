@@ -12,29 +12,32 @@
 }
 else
 {
-    <h1>Login</h1>
+    <h1 class="pagelabel text-center bg-primary text-light mb-5">Login</h1>
 }
 
-    <div class="container-fluid bd-highlight mb-3">
-        <div class="d-flex bd-highlight mb-3">
-            @if (HCA.HttpContext.Session.GetInt32("userid") == null)
+<div class="container-fluid  rounded col-3 mb-3 shadow pagetable">
+    <div class="mb-3 text-center">
+        @if (HCA.HttpContext.Session.GetInt32("userid") == null)
+        {
+            @using (Html.BeginForm("ConfirmUser", "User"))
             {
-                @using (Html.BeginForm("ConfirmUser", "User"))
-                {
-                    @Html.LabelFor(m => m.Identity.Email, "Enter Email")<br>
-                    @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email", required = "required" })
-                    <br>
-                    @Html.LabelFor(m => m.Identity.Password, "Enter password")<br>
-                    @Html.PasswordFor(m => m.Identity.Password, new { @required = "required" })
-                    <br>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Identity.Email, "Enter Email")
+                    @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email", required = "required", @class = "form-control text-center" })
+                </div>
 
-                    <button type="submit">
-                        Enter
-                    </button>
-                }
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Identity.Password, "Enter password")
+                    @Html.PasswordFor(m => m.Identity.Password, new { @required = "required", @class = "form-control text-center" })
+                </div>
+
+                <button class="btn btn-primary mt-3 mb-3" type="submit">
+                    Log In
+                </button>
             }
-        </div>
+        }
     </div>
+</div>
 
-            
+
 

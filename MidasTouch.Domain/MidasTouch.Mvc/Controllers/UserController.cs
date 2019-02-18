@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MidasTouch.Data.Helpers;
 using MidasTouch.Domain.Models;
@@ -12,10 +8,10 @@ namespace MidasTouch.Mvc.Controllers
 {
     public class UserController : Controller
     {
-        
+
         public ActionResult Login()
         {
-            
+
             return View();
         }
 
@@ -27,7 +23,7 @@ namespace MidasTouch.Mvc.Controllers
         public ActionResult Signout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult ConfirmUser(User enterred)
@@ -49,8 +45,7 @@ namespace MidasTouch.Mvc.Controllers
             HttpContext.Session.SetString("First", datauser.Identity.Name.First);
             HttpContext.Session.SetInt32("userid", datauser.Id);
 
-            ViewData["message"] = $"Login Succeded: Welcome {datauser.Identity.Name.First} {datauser.Identity.Name.Last}";
-            return View("Login");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Account()
@@ -70,7 +65,7 @@ namespace MidasTouch.Mvc.Controllers
                 return View("Register");
             }
 
-            if (newuser.Secondary!=newuser.Identity.Password)
+            if (newuser.Secondary != newuser.Identity.Password)
             {
                 ViewData["msg"] = "Passwords do not match.";
                 return View("Register");
@@ -78,7 +73,7 @@ namespace MidasTouch.Mvc.Controllers
 
             var gooduser = new User()
             {
-                AccountBalance = 2000,
+                AccountBalance = 500000,
                 Identity = new Identity()
                 {
                     Name = new Name()

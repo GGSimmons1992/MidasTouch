@@ -6,14 +6,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -29,17 +22,18 @@ body {
 
 
 .footer {
-  /*position: relative;*/
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: transparent;
+    color: white;
+    text-align: left;
 }
 
 html body *{
-    font-family: Garamond;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
 }
 
 .form-control{
@@ -89,7 +83,7 @@ html body *{
 .bg-img-else {
     /* The image used */
     background-image: url("https://imgur.com/siU6fnF.jpg");
-    min-height: 400px;
+    min-height: 300px;
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
@@ -128,7 +122,7 @@ html body *{
 }
 
 #newsurl{
-    font-size: 25px;
+    font-size: 20px;
     text-decoration: none;
     font-weight: bolder;
     border-color: gold;
@@ -138,15 +132,10 @@ html body *{
 }
 
 #newssummary{
-    font-size: 25px;
+    font-size: 17px;
     color: black;
    
 }
-
-#newstitle{
-    background-color: cadetblue;
-}
-
 
 .news {
     text-align: center;
@@ -157,3 +146,10 @@ html body *{
     transform: translate(-50%, -50%);
     color: black;
 }
+
+.pagelabel {
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 30px;
+}
+
+

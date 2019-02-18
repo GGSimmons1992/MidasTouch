@@ -5,25 +5,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h1 class="text-center text-light bg-dark rounded-bottom pagelabel" id="newstitle">
+    Market News
+</h1>
 
-<div>
-    <h1 class="text-center text-light rounded-bottom" id="newstitle">
-        Market News
-    </h1>
+<div class="d-flex justify-content-center">
+
     @foreach (var news in Model.MarketNews)
     {
-        <div class="container-fluid">
+        <div class="container-fluid border rounded shadow mr-2 ml-2">
             <div id="news" class="">
-                <div class="row col-5 mb-1">
+                <div class="row mb-1 text-center">
                     <a id="newsurl" href="@news.Url">@news.Headline</a>
                 </div>
-                <div class="row col-5 mb-1">
-                    <div id="newssummary" class="">
+                <div class="row mt-3 mb-2">
+                    <div id="newssummary" class="ml-2">
                         @news.Summary
                     </div>
                 </div>
-                <div class="row col-5 mb-3">
-                    <div>
+                <div class="row mb-1">
+                    <div class="justify-content-md-center">
                         @news.Datetime
                         @news.Source
                     </div>

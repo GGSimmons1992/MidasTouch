@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Register</h1>
+<h1 class="pagelabel text-center text-light bg-primary mb-5">Register</h1>
+
 @if (ViewData["msg"] != null)
 {
     <p>@ViewData["msg"]</p>
@@ -12,35 +13,46 @@
 
 @if (@ViewData["Good"] == null)
 {
-<div class="container-fluid bd-highlight mb-3">
-    <div class="d-flex bd-highlight mb-3">
-        @using (Html.BeginForm("ValidateRegistration", "User"))
-        {
+    <div class="container rounded col-3 mb-3 shadow">
+        <div class="mb-3 text-center">
+            @using (Html.BeginForm("ValidateRegistration", "User"))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Identity.Name.First, "Enter first name")
+                    @Html.TextBoxFor(m => m.Identity.Name.First, new { @required = "required", @class = "form-control text-center" })
 
-            @Html.LabelFor(m => m.Identity.Name.First, "Enter first name")<br>
-            @Html.TextBoxFor(m => m.Identity.Name.First, new { @required = "required" })
-            <br>
-            @Html.LabelFor(m => m.Identity.Name.Last, "Enter last name")<br>
-            @Html.TextBoxFor(m => m.Identity.Name.Last, new { @required = "required" })
-            <br>
-            @Html.LabelFor(m => m.Identity.Email, "Enter Email")<br>
-            @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email", required = "required" })
-            <br>
-            @Html.LabelFor(m => m.Identity.Password, "Create password")<br>
-            @Html.PasswordFor(m => m.Identity.Password, new { @required = "required" })
-            <br>
-            @Html.LabelFor(m => m.Secondary, "Re-enter password")<br>
-            @Html.PasswordFor(m => m.Secondary, new { @required = "required" })
-            <br>
+                </div>
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.Identity.Name.Last, "Enter last name")
+                    @Html.TextBoxFor(m => m.Identity.Name.Last, new { @required = "required", @class = "form-control text-center" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Identity.Email, "Enter Email")
+                    @Html.TextBoxFor(m => m.Identity.Email, new { @type = "email", required = "required", @class = "form-control text-center" })
 
 
-            <button type="submit">
-                Enter
-            </button>
-        }
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Identity.Password, "Enter password")
+                    @Html.PasswordFor(m => m.Identity.Password, new { @required = "required", @class = "form-control text-center" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Secondary, "Re-enter password")
+                    @Html.PasswordFor(m => m.Secondary, new { @required = "required", @class = "form-control text-center" })
 
+                </div>
+
+
+
+
+                <button class="btn btn-primary mb-3" type="submit">
+                    Register
+                </button>
+            }
+
+        </div>
     </div>
-</div>
 
 }
 
