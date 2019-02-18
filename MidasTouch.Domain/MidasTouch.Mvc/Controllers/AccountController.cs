@@ -8,15 +8,7 @@ namespace MidasTouch.Mvc.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly MidasTouchDBContext _context = new MidasTouchDBContext();
-
-        [HttpGet]
-
-        //public async Task<IActionResult> OrderHistory()
-        //{
-        //    return View(await _context.Shares.ToListAsync());
-
-        //}
+        
 
         public IActionResult Orders()
         {
