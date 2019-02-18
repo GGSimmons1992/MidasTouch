@@ -105,6 +105,7 @@ html body *{
     text-decoration: none;
     font-weight: bolder;
     border-color: gold;
+    color: white;
 }
 #newsurl:hover{
     color: #ffbf00;
