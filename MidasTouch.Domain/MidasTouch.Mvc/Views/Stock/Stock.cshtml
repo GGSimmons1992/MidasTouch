@@ -13,9 +13,11 @@
 
                 <div class="form-group">
 
+
                     <label class="" for="ticker">Ticker:</label>
 
                     @Html.TextBoxFor(m => m.Symbol, new { required = "required", @class = "form-control text-center", @placeholder = "SPY" })
+
                 </div>
 
                 <div class="form-group mb-5">
@@ -35,9 +37,11 @@
         <partial name="_TradeStock" />
 
     </div>
+
     <div class="row">
         <div class="shadow">
             <div class="bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
+
 
         </div>
     </div>
