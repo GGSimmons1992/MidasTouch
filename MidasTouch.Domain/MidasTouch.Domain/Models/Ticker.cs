@@ -1,5 +1,6 @@
 ﻿using MidasTouch.Domain.Abstracts;
 using System;
+using System.Security.Cryptography;
 
 namespace MidasTouch.Domain.Models
 {
@@ -12,9 +13,13 @@ namespace MidasTouch.Domain.Models
     public void Flux()
     {
       var Change = Beta - 1;
-      var Random = new Random();
+      var Random = RandomNumberGenerator.Create();
 
-      var Delta = Random.NextDouble();
+      byte[] Data = new byte[1];
+      Random.GetBytes(Data);
+      var numerator = BitConverter.ToDouble(Data,0);
+     
+      var Delta = numerator/255;
       Stocks.Price += Stocks.Price * (2 * Change * Delta - Change);
     }
 

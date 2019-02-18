@@ -36,8 +36,8 @@ namespace MidasTouch.Mvc.Models
         if (LatestVolume < TradeSharesCount || totalCost > User.AccountBalance)
         {
           return false;
-        };
-      };
+        }
+      }
 
       if (State == "Sell")
       {
@@ -46,16 +46,16 @@ namespace MidasTouch.Mvc.Models
         foreach (var item in sl)
         {
           cnt += item.NumberOfShares;
-        };
+        }
 
         if (LatestVolume < TradeSharesCount || TradeSharesCount > cnt)
         {
           return false;
-        };
+        }
 
         totalCost = -totalCost;
         TradeSharesCount = -TradeSharesCount;
-      };
+      }
 
       var share = new Share()
       {

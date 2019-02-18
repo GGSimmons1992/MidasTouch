@@ -120,7 +120,7 @@ namespace MidasTouch.Mvc.Controllers
           else
           {
             ViewData["message"] = state + " of " + tradesharescount + " " + symbol.ToUpper() + " unsuccessful";
-          };
+          }
         }
       }
       var states = new List<SelectListItem>()
