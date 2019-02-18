@@ -30,13 +30,6 @@ namespace MidasTouch.Tests
             Assert.True(Sut.IsValid());
         }
 
-        [Fact]
-        public void Test_Flux()
-        {
-            var baseprice = Sut.Stocks.Price;
-            Sut.Flux();
-            Assert.True(Sut.Stocks.Price >= (0.8 * baseprice));
-            Assert.True(Sut.Stocks.Price <= (1.2 * baseprice));
-        }
+       
     }
 }
