@@ -137,3 +137,10 @@ html body *{
     margin-right: -.25px;
 }
 
+/*.tickerbar{
+    margin-left: 75px;
+}*/
+
+.displaystock, {
+    position: center;
+}
