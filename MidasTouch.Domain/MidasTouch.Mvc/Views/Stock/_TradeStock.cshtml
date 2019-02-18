@@ -14,13 +14,13 @@
 
                 @using (Html.BeginForm(actionName: "Trade", controllerName: "Stock"))
                 {
-                    @Html.DropDownListFor(s => s.State, (IEnumerable<SelectListItem>)ViewBag.state)
+                    @Html.DropDownListFor(s => s.State, (IEnumerable<SelectListItem>)ViewBag.state, new { @class = "form-control" })
                     <br />
 
                     @Html.LabelFor(s => s.Symbol)
                     @Html.TextBoxFor(s => s.Symbol, new { @class = "form-control" })
 
-                    @Html.LabelFor(b => b.TradeSharesCount)
+                    @Html.DisplayName("Amount of Shares: ")
                     @Html.TextBoxFor(b => b.TradeSharesCount, new { @class = "form-control" })
 
                     <div class="modal-footer">

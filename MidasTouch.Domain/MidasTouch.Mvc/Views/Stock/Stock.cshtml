@@ -4,42 +4,51 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Market Summary</h1>
+<h1 class="text-center bg-info text-light pagelabel mb-4">Market Summary</h1>
 
-<div class="container-fluid bd-highlight mb-3">
-    <div class="d-flex bd-highlight mb-3">
+<div class="container-fluid bd-highlight mb-3 justify-content-center">
+    <div class="row mb-3">
+        <div class="col-3">
+            <form asp-action="Stock" asp-controller="Stock" class="text-center shadow mb-3 ml-3 mt-3">
 
-        <form asp-action="Stock" asp-controller="Stock" class="">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
 
-            <div class="row form-group form-inline" style="margin-top:5px;font-size:25px;">
-                <label class="col-sm-5 control-label" for="ticker">Ticker:</label>
-                <div class="col-sm-7 pl-0">
-                    <input asp-for="Symbol" name="symbol" class="form-control input-sm"
-                           style="height:35px;width:100%" placeholder="SPY" />
+                    <label class="" for="ticker">Ticker:</label>
+
+                    @Html.TextBoxFor(m => m.Symbol, new { required = "required", @class = "form-control text-center", @placeholder = "SPY" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                <button type="submit" id="sub" class="btn btn-primary">
-                    Search
-                </button>
+                <div class="form-group mb-5">
 
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tradeModal">
-                    Trade
-                </button>
+                    <button type="submit" id="sub" class="btn btn-primary mb-3">
+                        Search
+                    </button>
 
-            </div>
-        </form>
+                    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tradeModal">
+                        Trade
+                    </button>
+
+                </div>
+            </form>
+        </div>
+
+        <partial name="_TradeStock" />
+
     </div>
+    <div class="row">
+        <div class="shadow">
+            <div class="bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
 
-    <partial name="_TradeStock" />
-    <div class="p-2 bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
+        </div>
+    </div>
+    <div class="row">
+        <partial name="_DisplayChart" />
+    </div>
 </div>
 
 
 @section scripts{
-    
+
 
     <script>
         createStockChart();
@@ -55,7 +64,7 @@
             var ticker = String(document.getElementById('Symbol').value).toUpperCase();
 
             var viewStartDate = new Date('@DateTime.Today');
-            viewStartDate.setYear(viewStartDate.getFullYear() - 1);
+            viewStartDate.setMonth(viewStartDate.getMonth() - 3);
             var viewEndDate = new Date('@DateTime.Today');
             var startDate = viewStartDate.toISOString().split('T')[0];
             var endDate = viewEndDate.toISOString().split('T')[0];

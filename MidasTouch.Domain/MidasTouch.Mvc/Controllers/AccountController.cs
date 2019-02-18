@@ -28,13 +28,14 @@ namespace MidasTouch.Mvc.Controllers
 
             var userlist = (new UserHelper()).GetUsers();
             var myuser = userlist.FirstOrDefault(u => u.Id == HttpContext.Session.GetInt32("userid"));
-            
+
+
+            ViewData["AccountBalance"] = myuser.AccountBalance.ToString("#,##0");
 
             var portfolioHelper = new PortfolioHelper();
+            var PortfolioValue = portfolioHelper.GetPortfolioByUser(myuser);
+            ViewData["PortfolioValue"] = PortfolioValue.Value.ToString("#,##0");
             var UserPortfolio = portfolioHelper.GetPortfolioByUser(myuser).Shares.ToList();
-
-
-            //var Portfolio = new PortfolioViewModel();
 
             return View("OrderHistory", UserPortfolio);
         }
