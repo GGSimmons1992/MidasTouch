@@ -5,32 +5,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="text-center text-light bg-dark rounded-bottom pagelabel" id="newstitle">
+<h1 class="text-center text-light bg-warning rounded-bottom shadow pagelabel mb-3 " id="newstitle">
     Market News
 </h1>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex flex-wrap justify-content-center ml-4">
 
     @foreach (var news in Model.MarketNews)
     {
-        <div class="container-fluid border rounded shadow mr-2 ml-2">
-            <div id="news" class="">
-                <div class="row mb-1 text-center">
-                    <a id="newsurl" href="@news.Url">@news.Headline</a>
-                </div>
-                <div class="row mt-3 mb-2">
-                    <div id="newssummary" class="ml-2">
-                        @news.Summary
-                    </div>
-                </div>
-                <div class="row mb-1">
-                    <div class="justify-content-md-center">
-                        @news.Datetime
-                        @news.Source
-                    </div>
-                </div>
+
+        <div class="card text-white bg-primary mb-3 mr-4" style="max-width: 25rem;">
+            <div class="card-header">
+                <a id="newsurl" href="@news.Url">@news.Headline</a>
+            </div>
+            <div class="card-body">
+                <p class="card-title">@news.Summary</p>
             </div>
         </div>
+
+
+
+
+
+
+
+
+        @*<div class="container-fluid border rounded mb-4 shadow mr-2 ml-2 col-5">
+                <div id="news" class="">
+                    <div class="row mb-1 text-center">
+
+                    </div>
+                    <div class="row mt-3 mb-2">
+                        <div id="newssummary" class="ml-2 blockquote">
+                            @news.Summary
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="justify-content-md-center">
+                            @news.Datetime
+                            @news.Source
+                        </div>
+                    </div>
+                </div>
+            </div>*@
     }
 
 </div>
