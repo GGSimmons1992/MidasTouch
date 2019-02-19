@@ -6,50 +6,49 @@
 
 <h1 class="text-center bg-info text-light pagelabel mb-4">Market Summary</h1>
 
-<div class="container-fluid bd-highlight mb-3 justify-content-center">
-    <div class="row mb-3">
-        <div class="col-3">
-            <form asp-action="Stock" asp-controller="Stock" class="text-center shadow mb-3 ml-3 mt-3">
+<h2 class="mb-4 text-center">
+    <strong class="btn-warning rounded" style="font-size: 25px;">@ViewData["message"]</strong>
+</h2>
 
-                <div class="form-group">
+<div class="w-100 text-center">
+    <div class="d-inline-block border rounded displaystock shadow-lg">
+        <form asp-action="Stock" asp-controller="Stock" class="text-center ">
 
+            <div class="form-group p-2">
 
-                    <label class="" for="ticker">Ticker:</label>
-
-                    @Html.TextBoxFor(m => m.Symbol, new { required = "required", @class = "form-control text-center", @placeholder = "SPY" })
-
-                </div>
-
-                <div class="form-group mb-5">
-
-                    <button type="submit" id="sub" class="btn btn-primary mb-3">
-                        Search
-                    </button>
-
-                    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tradeModal">
-                        Trade
-                    </button>
-
-                </div>
-            </form>
-        </div>
-
-        <partial name="_TradeStock" />
-
+                @Html.DisplayName("Ticker")
+                @Html.TextBoxFor(m => m.Symbol, new { required = "required", @class = "form-control text-center", @placeholder = "SPY" })
+            </div>
+            <div class="form-group">
+                <button type="submit" id="sub" class="btn btn-primary mb-3">
+                    Search
+                </button>
+                <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#tradeModal">
+                    Trade
+                </button>
+            </div>
+        </form>
     </div>
 
-    <div class="row">
-        <div class="shadow">
-            <div class="bd-highlight container-fluid"><partial name="_DisplayQuote" /> </div>
+    <partial name="_TradeStock" />
 
-
+    <div class="w-100 text-center mt-3">
+        <div class="d-inline-block">
+            <div class="text-left">
+                <div class="bd-highlight"><partial name="_DisplayQuote" /> </div>
+            </div>
         </div>
     </div>
-    <div class="row">
+
+</div>
+
+
+
+<div class="container-fluid text-center">
+    <div class="">
         <partial name="_DisplayChart" />
     </div>
 </div>
-
 
 @section scripts{
 
