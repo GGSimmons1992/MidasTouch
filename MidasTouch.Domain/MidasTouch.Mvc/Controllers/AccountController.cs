@@ -14,8 +14,7 @@ namespace MidasTouch.Mvc.Controllers
         {
             if (HttpContext.Session.GetInt32("userid") == null)
             {
-                ViewData["message"] = "Please login";
-                return View("Login", "User");
+                return RedirectToAction("Login", "User");
             }
 
             var userlist = (new UserHelper()).GetUsers();

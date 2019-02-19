@@ -16,6 +16,11 @@ namespace MidasTouch.Mvc.Controllers
 
     public IActionResult Stock()
     {
+      if (HttpContext.Session.GetInt32("userid") == null)
+      {
+        return RedirectToAction("Login","User");
+      }
+
       var states = new List<SelectListItem>()
       {
         new SelectListItem { Value = "Buy", Text = "Buy" },
@@ -28,11 +33,6 @@ namespace MidasTouch.Mvc.Controllers
     [HttpPost]
     public IActionResult Stock(string symbol)
     {
-      if (HttpContext.Session.GetInt32("userid") == null)
-      {
-          ViewData["message"] = "Please login";
-          return View("Login", "User");
-      }
 
       var IEXTrading_API_PATH = "https://api.iextrading.com/1.0/stock/{0}/quote";
 
