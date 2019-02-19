@@ -122,7 +122,7 @@ namespace MidasTouch.Data.Helpers
             if (_db != null)
             {
                 var user = _db.Users.Include(x => x.Portfolio).Include(y => y.Identity)
-                .Where(u => u.Identity.Email == Email).FirstOrDefault();
+                .Where(u => u.Identity.Email.ToLower() == Email.ToLower()).FirstOrDefault();
 
                 if (user == null)
                 {
@@ -134,7 +134,7 @@ namespace MidasTouch.Data.Helpers
             else
             {
                 var user = _idb.Users.Include(x => x.Portfolio).Include(y => y.Identity)
-                .Where(u => u.Identity.Email == Email).FirstOrDefault();
+                .Where(u => u.Identity.Email.ToLower() == Email.ToLower()).FirstOrDefault();
 
                 if (user == null)
                 {
