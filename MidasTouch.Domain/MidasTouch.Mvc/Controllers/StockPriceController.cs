@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MidasTouch.Mvc.Models;
 using YahooFinanceApi;
@@ -44,6 +45,10 @@ namespace MidasTouch.Mvc.Controllers
 
         public IActionResult StockChart()
         {
+            if (HttpContext.Session.GetInt32("userid") == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
             return View();
         }
     }

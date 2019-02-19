@@ -90,10 +90,24 @@ namespace MidasTouch.Tests
             uh.SetUser(Sut);
             var datauser = uh.GetUserByEmail(Sut.Identity.Email);
             Assert.NotNull(datauser);
+            var datauser1 = uh.GetUserByEmail(Sut.Identity.Email.ToLower());
+            Assert.True(datauser1.Id==datauser.Id);
+            var datauser2 = uh.GetUserByEmail(Sut.Identity.Email.ToUpper());
+            Assert.True(datauser2.Id==datauser1.Id);
+
+
+        }
+
+        [Fact]
+        public void Test_CheckUserPortfolio()
+        {
+            uh.SetUser(Sut);
+            var datauser = uh.GetUserByEmail(Sut.Identity.Email);
+            Assert.NotNull(datauser);
             var datashare50 = (datauser.Portfolio.Shares).FirstOrDefault(s => s.Price == 50);
             Assert.NotNull(datashare50);
             Assert.True(datauser.Portfolio.Value == Sut.Portfolio.Value);
-
         }
+
     }
 }
