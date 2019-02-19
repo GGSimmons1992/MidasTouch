@@ -11,131 +11,190 @@
 <div class="container-fluid mb-5">
     Account Balance: $@ViewData["AccountBalance"]
 </div>
+
+
+@*<div class="">
+        <table class="table table-hover border table-bordered w-50" align="center">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">Action</th>
+                    <th scope="col">Symbol</th>
+                    <th scope="col">Shares</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Time</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="table-success">
+                    <th scope="row">Success</th>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+
+                </tr>
+                <tr class="table-danger">
+                    <th scope="row">Danger</th>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="card">
-    <div class="table-responsive">
-        @if (Model.Count > 0)
-        {
-            <h3>Order History</h3>
-            <div>
-                Portfolio Value: $@ViewData["PortfolioValue"]
-            </div>
+    @if (Model.Count > 0)
+    {
+        <h3>Order History</h3>
+        <div>
+            Portfolio Value: $@ViewData["PortfolioValue"]
+        </div>
 
-            <table class="table rounded table-condensed table-bordered">
+        <table class="table table-hover rounded table-condensed table-bordered w-50" align="center">
 
-                <thead class="bg-primary text-center">
-                    <tr>
+            <thead class="bg-primary text-center">
+                <tr>
 
-                        <th>
-                            @Html.DisplayName("Action")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Symbol")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Shares Count")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Price")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Total")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Time")
-                        </th>
+                    <th>
+                        @Html.DisplayName("Action")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Symbol")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Shares Count")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Price")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Total")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Time")
+                    </th>
 
 
-                    </tr>
-                </thead>
+                </tr>
+            </thead>
 
-                <tbody>
-                    @foreach (var order in Model)
+            <tbody>
+                @foreach (var order in Model)
+                {
+
+                    @if (order.State == "Buy")
                     {
+                        <tr class="bg-success text-center">
+                            <td>
+                                <p>
+                                    @order.State
+                                </p>
 
-                        @if (order.State == "Buy")
-                        {
-                            <tr class="bg-success text-center">
-                                <td>
-                                    <p>
-                                        @order.State
-                                    </p>
+                            </td>
 
-                                </td>
+                            <td>
+                                <p>
+                                    @order.Symbol
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.NumberOfShares.ToString("#,##0")
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@order.Price.ToString("#,##0")
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@(((order.Price) * (order.NumberOfShares)).ToString("#,##0"))
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.TimeStamp
+                                </p>
+                            </td>
 
-                                <td>
-                                    <p>
-                                        @order.Symbol
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        @order.NumberOfShares.ToString("#,##0")
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        $@order.Price.ToString("#,##0")
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        $@(((order.Price) * (order.NumberOfShares)).ToString("#,##0"))
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        @order.TimeStamp
-                                    </p>
-                                </td>
-
-                            </tr>
-                        }
-                        else
-                        {
-                            <tr class="bg-danger text-center">
-                                <td>
-                                    <p>
-                                        @order.State
-                                    </p>
-
-                                </td>
-
-                                <td>
-                                    <p>
-                                        @order.Symbol
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        @order.NumberOfShares.ToString("#,##0")
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        $@order.Price.ToString("#,##0")
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        $@(((order.Price) * (-order.NumberOfShares)).ToString("#,##0"))
-                                    </p>
-                                </td>
-                                <td>
-                                    <p>
-                                        @order.TimeStamp
-                                    </p>
-                                </td>
-
-                            </tr>
-                        }
-
-
+                        </tr>
                     }
-                </tbody>
-            </table>
-        }
+                    else
+                    {
+                        <tr class="bg-danger text-center">
+                            <td>
+                                <p>
+                                    @order.State
+                                </p>
 
-    </div>
+                            </td>
+
+                            <td>
+                                <p>
+                                    @order.Symbol
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.NumberOfShares.ToString("#,##0")
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@order.Price.ToString("#,##0")
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    $@(((order.Price) * (-order.NumberOfShares)).ToString("#,##0"))
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    @order.TimeStamp
+                                </p>
+                            </td>
+
+                        </tr>
+                    }
+
+
+                }
+            </tbody>
+        </table>
+    }
+
 </div>
 
 

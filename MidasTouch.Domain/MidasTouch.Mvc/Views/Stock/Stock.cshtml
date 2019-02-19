@@ -6,6 +6,10 @@
 
 <h1 class="text-center bg-info text-light pagelabel mb-4">Market Summary</h1>
 
+<h2 class="mb-4 text-center">
+    <strong class="btn-warning rounded" style="font-size: 25px;">@ViewData["message"]</strong>
+</h2>
+
 <div class="w-100 text-center">
     <div class="d-inline-block border rounded displaystock shadow-lg">
         <form asp-action="Stock" asp-controller="Stock" class="text-center ">
@@ -40,7 +44,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid text-center">
     <div class="">
         <partial name="_DisplayChart" />
     </div>
