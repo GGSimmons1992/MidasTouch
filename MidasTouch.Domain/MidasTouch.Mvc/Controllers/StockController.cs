@@ -28,6 +28,12 @@ namespace MidasTouch.Mvc.Controllers
     [HttpPost]
     public IActionResult Stock(string symbol)
     {
+      if (HttpContext.Session.GetInt32("userid") == null)
+      {
+          ViewData["message"] = "Please login";
+          return View("Login", "User");
+      }
+
       var IEXTrading_API_PATH = "https://api.iextrading.com/1.0/stock/{0}/quote";
 
       IEXTrading_API_PATH = string.Format(IEXTrading_API_PATH, symbol);
